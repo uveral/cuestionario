@@ -2,8 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8" />
-  <title>Cuestionario</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <title>Cuestionario Supabase</title>
 </head>
 <body>
   <h1>Cuestionario simple</h1>
@@ -12,6 +11,9 @@
   <label>Pregunta 1: <input id="pregunta1" /></label><br/>
   <label>Pregunta 2: <input id="pregunta2" /></label><br/>
   <button onclick="enviar()">Enviar</button>
+
+  <!-- Cargar la librería de Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <script>
     const supabaseUrl = 'https://syscmsennlikqzikbznl.supabase.co';
