@@ -769,16 +769,29 @@
 
             <button
                 id="enviar"
-                type="submit" <!-- Set type to submit for form handling -->
-                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300 transform hover:scale-105 text-lg"
+                type="submit"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300 transform hover:scale-105 text-lg mb-4"
             >
                 Enviar Cuestionario
+            </button>
+            <button
+                id="descargarCsv"
+                type="button"
+                class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 transition duration-300 transform hover:scale-105 text-lg"
+            >
+                Descargar Datos (CSV)
             </button>
         </form> <!-- Closing form tag -->
     </div>
 
     <!-- Custom message box container -->
     <div id="messageBox"></div>
+    <div id="loadingMessage" class="modal-overlay hidden">
+        <div class="modal-content">
+            <p class="text-gray-800 text-lg font-medium">Cargando datos para CSV...</p>
+        </div>
+    </div>
+
 
     <!-- Load Supabase library -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -1138,10 +1151,6 @@
             }
 
             try {
-                // Supabase will automatically handle JSON objects.
-                // We're sending all data under a single column, e.g., 'respuestas_completas'.
-                // You'll need to ensure your Supabase table 'respuestas' has a column
-                // (e.g., of type `jsonb`) named `respuestas_completas` to store this.
                 const { data, error } = await supabaseClient
                     .from('respuestas')
                     .insert([{ dni: formData.dni, respuestas_completas: formData }]); // Store all data in one JSONB column
@@ -1169,6 +1178,84 @@
                 showMessage('Ha ocurrido un error inesperado al enviar: ' + e.message, 'error');
             }
         });
+
+        document.getElementById('descargarCsv').addEventListener('click', async () => {
+            const loadingMessage = document.getElementById('loadingMessage');
+            loadingMessage.classList.remove('hidden');
+
+            try {
+                const { data, error } = await supabaseClient
+                    .from('respuestas')
+                    .select('respuestas_completas'); // Select only the jsonb column
+
+                if (error) {
+                    showMessage('Error al cargar los datos para el CSV: ' + error.message, 'error');
+                    return;
+                }
+
+                if (!data || data.length === 0) {
+                    showMessage('No hay datos para exportar.');
+                    return;
+                }
+
+                let allKeys = new Set();
+                let flattenedData = [];
+
+                // Flatten each JSON object and collect all unique keys
+                data.forEach(row => {
+                    if (row.respuestas_completas) {
+                        let flatRow = {};
+                        for (const key in row.respuestas_completas) {
+                            if (Object.hasOwnProperty.call(row.respuestas_completas, key)) {
+                                const value = row.respuestas_completas[key];
+                                if (Array.isArray(value)) {
+                                    // Join array elements into a single string for CSV
+                                    flatRow[key] = value.join('; '); // Use semicolon to avoid issues with commas in values
+                                } else if (value === null) {
+                                    flatRow[key] = ''; // Represent null as empty string in CSV
+                                } else {
+                                    flatRow[key] = String(value).replace(/"/g, '""'); // Escape double quotes
+                                }
+                                allKeys.add(key);
+                            }
+                        }
+                        flattenedData.push(flatRow);
+                    }
+                });
+
+                // Convert Set of keys to an array and sort them for consistent column order
+                const headers = Array.from(allKeys).sort();
+
+                // Build CSV string
+                let csv = headers.map(header => `"${header}"`).join(',') + '\n'; // CSV header row
+
+                flattenedData.forEach(row => {
+                    const rowValues = headers.map(header => {
+                        const value = row[header] !== undefined ? row[header] : ''; // Handle missing keys
+                        // Ensure values are properly quoted if they contain commas or newlines
+                        return `"${String(value).replace(/"/g, '""')}"`;
+                    });
+                    csv += rowValues.join(',') + '\n';
+                });
+
+                // Create a Blob and download link
+                const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.setAttribute('download', 'cuestionario_respuestas.csv');
+                document.body.appendChild(link); // Append to body to make it clickable in some browsers
+                link.click();
+                document.body.removeChild(link); // Clean up
+
+                showMessage('Datos descargados como CSV correctamente.');
+
+            } catch (e) {
+                showMessage('Ha ocurrido un error inesperado al descargar el CSV: ' + e.message, 'error');
+            } finally {
+                loadingMessage.classList.add('hidden');
+            }
+        });
+
     </script>
 </body>
 </html>
