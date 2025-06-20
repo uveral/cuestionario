@@ -10,9 +10,9 @@
   <label>DNI: <input id="dni" /></label><br/>
   <label>Pregunta 1: <input id="pregunta1" /></label><br/>
   <label>Pregunta 2: <input id="pregunta2" /></label><br/>
-  <button onclick="enviar()">Enviar</button>
+  <button id="enviar">Enviar</button>
 
-  <!-- Cargar la librería de Supabase -->
+  <!-- Cargar librería Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <script>
@@ -21,7 +21,7 @@
 
     const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-    async function enviar() {
+    document.getElementById('enviar').addEventListener('click', async () => {
       const dni = document.getElementById('dni').value.trim();
       const p1 = document.getElementById('pregunta1').value.trim();
       const p2 = document.getElementById('pregunta2').value.trim();
@@ -43,7 +43,7 @@
         document.getElementById('pregunta1').value = '';
         document.getElementById('pregunta2').value = '';
       }
-    }
+    });
   </script>
 </body>
 </html>
