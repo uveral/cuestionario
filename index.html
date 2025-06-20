@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Cuestionario</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <h1>Cuestionario simple</h1>
+
+  <label>DNI: <input id="dni" /></label><br/>
+  <label>Pregunta 1: <input id="pregunta1" /></label><br/>
+  <label>Pregunta 2: <input id="pregunta2" /></label><br/>
+  <button onclick="enviar()">Enviar</button>
+
+  <script>
+    const supabaseUrl = 'https://syscmsennlikqzikbznl.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN5c2Ntc2Vubmxpa3F6aWtiem5sIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA0MTQ0MDcsImV4cCI6MjA2NTk5MDQwN30.I5cQJNCEFtF1NAIypmgMBYAIiVnSyhu_7C1WhKzCVxE';
+
+    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+    async function enviar() {
+      const dni = document.getElementById('dni').value.trim();
+      const p1 = document.getElementById('pregunta1').value.trim();
+      const p2 = document.getElementById('pregunta2').value.trim();
+
+      if (!dni || !p1 || !p2) {
+        alert('Rellena todos los campos');
+        return;
+      }
+
+      const { data, error } = await supabase
+        .from('respuestas')
+        .insert([{ dni, pregunta1: p1, pregunta2: p2 }]);
+
+      if (error) {
+        alert('Error: ' + error.message);
+      } else {
+        alert('Respuesta enviada');
+        document.getElementById('dni').value = '';
+        document.getElementById('pregunta1').value = '';
+        document.getElementById('pregunta2').value = '';
+      }
+    }
+  </script>
+</body>
+</html>
