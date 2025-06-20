@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cuestionario Supabase</title>
+    <title>Cuestionario Psicológico Postmisión</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -13,9 +13,18 @@
             background-color: #f3f4f6; /* Light gray background */
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start; /* Align to start for scrolling */
             min-height: 100vh;
-            padding: 1rem;
+            padding: 2rem 1rem; /* More padding top/bottom */
+            box-sizing: border-box;
+        }
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* shadow-lg */
+            width: 100%;
+            max-width: 6xl; /* Increased max-width for better question display */
             box-sizing: border-box;
         }
         /* Custom modal styles */
@@ -51,47 +60,717 @@
             cursor: pointer;
             color: #6b7280; /* text-gray-500 */
         }
+        .question-group {
+            border-bottom: 1px solid #e5e7eb; /* border-b border-gray-200 */
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .question-group:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .radio-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .radio-option input[type="radio"] {
+            margin-right: 0.5rem;
+        }
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .checkbox-option input[type="checkbox"] {
+            margin-right: 0.5rem;
+        }
     </style>
 </head>
 <body class="selection:bg-blue-200 selection:text-blue-900">
-    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
-        <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Cuestionario Simple</h1>
+    <div class="container">
+        <h1 class="text-4xl font-extrabold mb-8 text-center text-gray-900">Cuestionario Psicológico Postmisión para la Armada Española</h1>
 
-        <div class="mb-4">
-            <label for="dni" class="block text-gray-700 text-sm font-semibold mb-2">DNI:</label>
-            <input
-                type="text"
-                id="dni"
-                class="shadow-sm appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
-                placeholder="Introduce tu DNI"
-            />
-        </div>
+        <p class="mb-6 text-gray-700 text-center leading-relaxed">Este cuestionario tiene como finalidad ayudarle a identificar si ha experimentado cambios emocionales, psicológicos o conductuales tras su regreso de una navegación. Su colaboración es muy importante para poder ofrecerle apoyo si lo necesita.</p>
+        <p class="mb-6 text-gray-700 text-center leading-relaxed">Por favor, lea atentamente cada una de las preguntas. En la mayoría de los casos, deberá marcar o rodear con un círculo la opción que mejor refleje su situación o experiencia reciente. En algunas preguntas específicas se le solicitará que escriba una respuesta breve en el espacio indicado.</p>
 
-        <div class="mb-4">
-            <label for="pregunta1" class="block text-gray-700 text-sm font-semibold mb-2">Pregunta 1:</label>
-            <input
-                type="text"
-                id="pregunta1"
-                class="shadow-sm appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
-                placeholder="Respuesta a la pregunta 1"
-            />
-        </div>
+        <section class="question-group">
+            <h2 class="text-2xl font-semibold mb-4 text-blue-700">DATOS DE FILIACIÓN</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="nombre" class="block text-gray-700 text-sm font-semibold mb-2">Nombre:</label>
+                    <input type="text" id="nombre" class="shadow-sm border rounded-lg w-full py-2 px-3 text-gray-700" placeholder="Introduce tu nombre" />
+                </div>
+                <div>
+                    <label for="apellidos" class="block text-gray-700 text-sm font-semibold mb-2">Apellidos:</label>
+                    <input type="text" id="apellidos" class="shadow-sm border rounded-lg w-full py-2 px-3 text-gray-700" placeholder="Introduce tus apellidos" />
+                </div>
+                <div>
+                    <label for="dni" class="block text-gray-700 text-sm font-semibold mb-2">DNI:</label>
+                    <input type="text" id="dni" class="shadow-sm border rounded-lg w-full py-2 px-3 text-gray-700" placeholder="Introduce tu DNI" />
+                </div>
+                <div>
+                    <label for="empleo" class="block text-gray-700 text-sm font-semibold mb-2">Empleo:</label>
+                    <input type="text" id="empleo" class="shadow-sm border rounded-lg w-full py-2 px-3 text-gray-700" placeholder="Introduce tu empleo" />
+                </div>
+                <div>
+                    <label for="destino" class="block text-gray-700 text-sm font-semibold mb-2">Destino:</label>
+                    <input type="text" id="destino" class="shadow-sm border rounded-lg w-full py-2 px-3 text-gray-700" placeholder="Introduce tu destino" />
+                </div>
+                <div>
+                    <label for="ultimoDespliegue" class="block text-gray-700 text-sm font-semibold mb-2">Último despliegue:</label>
+                    <input type="text" id="ultimoDespliegue" class="shadow-sm border rounded-lg w-full py-2 px-3 text-gray-700" placeholder="Ej: Zona de operaciones / Misión" />
+                </div>
+                <div>
+                    <label for="telefonoContacto" class="block text-gray-700 text-sm font-semibold mb-2">Teléfono de contacto (opcional):</label>
+                    <input type="tel" id="telefonoContacto" class="shadow-sm border rounded-lg w-full py-2 px-3 text-gray-700" placeholder="Introduce tu teléfono" />
+                </div>
+            </div>
+        </section>
 
-        <div class="mb-6">
-            <label for="pregunta2" class="block text-gray-700 text-sm font-semibold mb-2">Pregunta 2:</label>
-            <input
-                type="text"
-                id="pregunta2"
-                class="shadow-sm appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
-                placeholder="Respuesta a la pregunta 2"
-            />
-        </div>
+        <!-- Question 1 -->
+        <section class="question-group">
+            <p class="text-lg font-medium mb-3 text-gray-800">1. En general, ¿Cómo calificaría su estado de salud en el ÚLTIMO MES?</p>
+            <div class="flex flex-col space-y-2">
+                <label class="radio-option"><input type="radio" name="saludGeneral" value="Excelente" class="form-radio text-blue-600" /> Excelente</label>
+                <label class="radio-option"><input type="radio" name="saludGeneral" value="Muy bueno" class="form-radio text-blue-600" /> Muy bueno</label>
+                <label class="radio-option"><input type="radio" name="saludGeneral" value="Bueno" class="form-radio text-blue-600" /> Bueno</label>
+                <label class="radio-option"><input type="radio" name="saludGeneral" value="Regular" class="form-radio text-blue-600" /> Regular</label>
+                <label class="radio-option"><input type="radio" name="saludGeneral" value="Malo" class="form-radio text-blue-600" /> Malo</label>
+            </div>
+        </section>
+
+        <!-- Question 2 -->
+        <section class="question-group">
+            <p class="text-lg font-medium mb-3 text-gray-800">2. ¿Cómo calificaría su salud actual, en general, si lo compara con la de antes de hacer esta navegación?</p>
+            <div class="flex flex-col space-y-2">
+                <label class="radio-option"><input type="radio" name="saludComparada" value="Mucho mejor antes que ahora" class="form-radio text-blue-600" /> Mucho mejor antes que ahora</label>
+                <label class="radio-option"><input type="radio" name="saludComparada" value="Algo mejor ahora que antes de navegar" class="form-radio text-blue-600" /> Algo mejor ahora que antes de navegar</label>
+                <label class="radio-option"><input type="radio" name="saludComparada" value="Mas o menos igual que antes de navegar" class="form-radio text-blue-600" /> Más o menos igual que antes de navegar</label>
+                <label class="radio-option"><input type="radio" name="saludComparada" value="Algo peor ahora que antes de navegar. ¿Por qué?" class="form-radio text-blue-600" /> Algo peor ahora que antes de navegar. ¿Por qué?</label>
+                <label class="radio-option"><input type="radio" name="saludComparada" value="Mucho peor ahora que antes de navegar. ¿Por qué?" class="form-radio text-blue-600" /> Mucho peor ahora que antes de navegar. ¿Por qué?</label>
+            </div>
+            <textarea id="saludComparadaPorQue" class="shadow-sm border rounded-lg w-full py-2 px-3 text-gray-700 mt-2 hidden" placeholder="Explica por qué tu salud es peor..."></textarea>
+        </section>
+
+        <!-- Question 3 -->
+        <section class="question-group">
+            <p class="text-lg font-medium mb-3 text-gray-800">3. Durante las últimas 4 semanas, ¿Ha tenido problemas de salud (enfermedad o lesión) que le hayan ocasionado dificultades en su trabajo o vida diaria?</p>
+            <div class="flex flex-col space-y-2">
+                <label class="radio-option"><input type="radio" name="problemasSalud" value="No, ninguno" class="form-radio text-blue-600" /> No, ninguno</label>
+                <label class="radio-option"><input type="radio" name="problemasSalud" value="Alguno/s" class="form-radio text-blue-600" /> Alguno/s</label>
+                <label class="radio-option"><input type="radio" name="problemasSalud" value="Bastantes" class="form-radio text-blue-600" /> Bastantes</label>
+                <label class="radio-option"><input type="radio" name="problemasSalud" value="Muchos" class="form-radio text-blue-600" /> Muchos</label>
+            </div>
+        </section>
+
+        <!-- Question 4 -->
+        <section class="question-group">
+            <p class="text-lg font-medium mb-3 text-gray-800">4. Durante las últimas 4 semanas, ¿Ha tenido problemas emocionales (como sentirse deprimido o ansioso) que le hayan ocasionado dificultades en su trabajo, en su día a día o en sus relaciones personales?</p>
+            <div class="flex flex-col space-y-2">
+                <label class="radio-option"><input type="radio" name="problemasEmocionales" value="No, ninguno" class="form-radio text-blue-600" /> No, ninguno</label>
+                <label class="radio-option"><input type="radio" name="problemasEmocionales" value="Alguno/s" class="form-radio text-blue-600" /> Alguno/s</label>
+                <label class="radio-option"><input type="radio" name="problemasEmocionales" value="Bastantes" class="form-radio text-blue-600" /> Bastantes</label>
+                <label class="radio-option"><input type="radio" name="problemasEmocionales" value="Muchos" class="form-radio text-blue-600" /> Muchos</label>
+            </div>
+        </section>
+
+        <!-- Question 5 -->
+        <section class="question-group">
+            <p class="text-lg font-medium mb-3 text-gray-800">5. Desde que volviste de navegar, ¿Cuántas veces has ido al médico por alguna razón (urgencias, médico de familia, psicólogo)?</p>
+            <div class="flex flex-col space-y-2">
+                <label class="radio-option"><input type="radio" name="visitasMedico" value="Ninguna" class="form-radio text-blue-600" /> Ninguna</label>
+                <label class="radio-option"><input type="radio" name="visitasMedico" value="1 vez" class="form-radio text-blue-600" /> 1 vez</label>
+                <label class="radio-option"><input type="radio" name="visitasMedico" value="2-3 veces" class="form-radio text-blue-600" /> 2-3 veces</label>
+                <label class="radio-option"><input type="radio" name="visitasMedico" value="4-5 veces" class="form-radio text-blue-600" /> 4-5 veces</label>
+                <label class="radio-option"><input type="radio" name="visitasMedico" value="6 o más" class="form-radio text-blue-600" /> 6 o más</label>
+            </div>
+        </section>
+
+        <!-- Question 6 -->
+        <section class="question-group">
+            <p class="text-lg font-medium mb-3 text-gray-800">6. Desde que volviste de navegar, ¿Has estado ingresado/hospitalizado?</p>
+            <div class="flex flex-col space-y-2">
+                <label class="radio-option"><input type="radio" name="hospitalizado" value="Si" class="form-radio text-blue-600" /> Sí</label>
+                <label class="radio-option"><input type="radio" name="hospitalizado" value="No" class="form-radio text-blue-600" /> No</label>
+            </div>
+        </section>
+
+        <!-- Question 7 -->
+        <section class="question-group">
+            <p class="text-lg font-medium mb-3 text-gray-800">7. Durante la navegación, ¿Has sufrido alguna lesión o accidente en el que resultaste herido?</p>
+            <div class="flex flex-col space-y-2">
+                <label class="radio-option"><input type="radio" name="lesionAccidente" value="Si" class="form-radio text-blue-600" /> Sí</label>
+                <label class="radio-option"><input type="radio" name="lesionAccidente" value="No" class="form-radio text-blue-600" /> No</label>
+            </div>
+            <div id="lesionAccidenteFollowUp" class="mt-4 hidden">
+                <p class="text-base font-medium mb-2 text-gray-700">Si ha respondido SÍ, ¿Continúa teniendo problemas relacionado con ello?</p>
+                <div class="flex flex-col space-y-2">
+                    <label class="radio-option"><input type="radio" name="problemasLesion" value="Si" class="form-radio text-blue-600" /> Sí</label>
+                    <label class="radio-option"><input type="radio" name="problemasLesion" value="No" class="form-radio text-blue-600" /> No</label>
+                    <label class="radio-option"><input type="radio" name="problemasLesion" value="No estoy seguro" class="form-radio text-blue-600" /> No estoy seguro</label>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question 8 -->
+        <section class="question-group">
+            <p class="text-lg font-medium mb-3 text-gray-800">8. Durante la navegación:</p>
+            <div class="mb-3">
+                <p class="text-base font-medium mb-2 text-gray-700">a) ¿Hubo alguna ocasión en la que sintiera que podría morir o estuvo en peligro?</p>
+                <div class="flex flex-col space-y-2">
+                    <label class="radio-option"><input type="radio" name="peligroMuerte" value="Si" class="form-radio text-blue-600" /> Sí</label>
+                    <label class="radio-option"><input type="radio" name="peligroMuerte" value="No" class="form-radio text-blue-600" /> No</label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <p class="text-base font-medium mb-2 text-gray-700">b) ¿Vió cadáveres, personas heridas o fallecidas durante el despliegue?</p>
+                <div class="flex flex-col space-y-2">
+                    <label class="radio-option"><input type="radio" name="vioCadaveres" value="Si" class="form-radio text-blue-600" /> Sí</label>
+                    <label class="radio-option"><input type="radio" name="vioCadaveres" value="No" class="form-radio text-blue-600" /> No</label>
+                </div>
+            </div>
+            <div>
+                <p class="text-base font-medium mb-2 text-gray-700">c) ¿Participó en combate directo o tuvo que usar un arma?</p>
+                <div class="flex flex-col space-y-2">
+                    <label class="radio-option"><input type="radio" name="combateArma" value="Si" class="form-radio text-blue-600" /> Sí</label>
+                    <label class="radio-option"><input type="radio" name="combateArma" value="No" class="form-radio text-blue-600" /> No</label>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question 9 -->
+        <section class="question-group">
+            <p class="text-lg font-medium mb-3 text-gray-800">9. Durante el último mes, ¿Ha habido algún acontecimiento en su vida que le preocupe o le dificulte su trabajo, su día a día en casa o su relación con otras personas (por ejemplo, conflictos serios con los demás, problemas legales, disciplinarios o financieros)?</p>
+            <div class="flex flex-col space-y-2">
+                <label class="radio-option"><input type="radio" name="acontecimientoPreocupante" value="No" class="form-radio text-blue-600" /> No</label>
+                <label class="radio-option"><input type="radio" name="acontecimientoPreocupante" value="Si" class="form-radio text-blue-600" /> Sí. (Por favor, explique)</label>
+            </div>
+            <textarea id="acontecimientoPreocupanteExplica" class="shadow-sm border rounded-lg w-full py-2 px-3 text-gray-700 mt-2 hidden" placeholder="Explica el acontecimiento..."></textarea>
+            <div id="acontecimientoPreocupanteFollowUp" class="mt-4 hidden">
+                <p class="text-base font-medium mb-2 text-gray-700">Si ha respondido afirmativamente: ¿Está recibiendo actualmente algún tipo de tratamiento médico o psicológico por este problema?</p>
+                <div class="flex flex-col space-y-2">
+                    <label class="radio-option"><input type="radio" name="tratamientoAcontecimiento" value="Si" class="form-radio text-blue-600" /> Sí</label>
+                    <label class="radio-option"><input type="radio" name="tratamientoAcontecimiento" value="No" class="form-radio text-blue-600" /> No</label>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question 10 -->
+        <section class="question-group">
+            <p class="text-lg font-medium mb-3 text-gray-800">10. Además de lo anterior, ¿Actualmente le preocupa alguno de los siguientes síntomas y cree que está relacionado con la última navegación?</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                <label class="checkbox-option"><input type="checkbox" name="sintomas" value="Fiebre" class="form-checkbox text-blue-600" /> Fiebre</label>
+                <label class="checkbox-option"><input type="checkbox" name="sintomas" value="Visión borrosa o disminución de la vista" class="form-checkbox text-blue-600" /> Visión borrosa o disminución de la vista</label>
+                <label class="checkbox-option"><input type="checkbox" name="sintomas" value="Tos más de tres veces por semana" class="form-checkbox text-blue-600" /> Tos más de tres veces por semana</label>
+                <label class="checkbox-option"><input type="checkbox" name="sintomas" value="Dolor o presión en el pecho" class="form-checkbox text-blue-600" /> Dolor o presión en el pecho</label>
+                <label class="checkbox-option"><input type="checkbox" name="sintomas" value="Dificultad para respirar" class="form-checkbox text-blue-600" /> Dificultad para respirar</label>
+                <label class="checkbox-option"><input type="checkbox" name="sintomas" value="Mareos / desmayos / pérdida de conciencia" class="form-checkbox text-blue-600" /> Mareos / desmayos / pérdida de conciencia</label>
+                <label class="checkbox-option"><input type="checkbox" name="sintomas" value="Dolor de cabeza" class="form-checkbox text-blue-600" /> Dolor de cabeza</label>
+                <label class="checkbox-option"><input type="checkbox" name="sintomas" value="Diarrea, vómitos, indigestión o ardores" class="form-checkbox text-blue-600" /> Diarrea, vómitos, indigestión o ardores</label>
+                <label class="checkbox-option"><input type="checkbox" name="sintomas" value="Cansancio general" class="form-checkbox text-blue-600" /> Cansancio general</label>
+                <label class="checkbox-option"><input type="checkbox" name="sintomas" value="Problemas para dormir o sueño no reparador" class="form-checkbox text-blue-600" /> Problemas para dormir o sueño no reparador</label>
+                <label class="checkbox-option"><input type="checkbox" name="sintomas" value="Dolor muscular" class="form-checkbox text-blue-600" /> Dolor muscular</label>
+                <label class="checkbox-option"><input type="checkbox" name="sintomas" value="Problemas de concentración / se distrae fácilmente" class="form-checkbox text-blue-600" /> Problemas de concentración / se distrae fácilmente</label>
+                <label class="checkbox-option"><input type="checkbox" name="sintomas" value="Dolor en las articulaciones" class="form-checkbox text-blue-600" /> Dolor en las articulaciones</label>
+                <label class="checkbox-option"><input type="checkbox" name="sintomas" value="Problemas de memoria o para recordar cosas" class="form-checkbox text-blue-600" /> Problemas de memoria o para recordar cosas</label>
+                <label class="checkbox-option"><input type="checkbox" name="sintomas" value="Dolor de espalda" class="form-checkbox text-blue-600" /> Dolor de espalda</label>
+                <label class="checkbox-option"><input type="checkbox" name="sintomas" value="Dificultades para tomar decisiones" class="form-checkbox text-blue-600" /> Dificultades para tomar decisiones</label>
+                <label class="checkbox-option"><input type="checkbox" name="sintomas" value="Hormigueo o calambres en manos/pies" class="form-checkbox text-blue-600" /> Hormigueo o calambres en manos/pies</label>
+                <label class="checkbox-option"><input type="checkbox" name="sintomas" value="Irritabilidad / ira" class="form-checkbox text-blue-600" /> Irritabilidad / ira</label>
+                <label class="checkbox-option"><input type="checkbox" name="sintomas" value="Problemas de oído / dificultad para oír" class="form-checkbox text-blue-600" /> Problemas de oído / dificultad para oír</label>
+                <label class="checkbox-option"><input type="checkbox" name="sintomas" value="Aumento de conductas de riesgo como correr con el coche" class="form-checkbox text-blue-600" /> Aumento de conductas de riesgo como correr con el coche</label>
+                <label class="checkbox-option"><input type="checkbox" name="sintomas" value="Tinnitus / acufenos / pitidos en los oídos" class="form-checkbox text-blue-600" /> Tinnitus / acúfenos / pitidos en los oídos</label>
+                <label class="checkbox-option"><input type="checkbox" name="sintomas" value="Erupciones o problemas en la piel" class="form-checkbox text-blue-600" /> Erupciones o problemas en la piel</label>
+                <label class="checkbox-option"><input type="checkbox" name="sintomas" value="Ojos vidriosos / enrojecidos" class="form-checkbox text-blue-600" /> Ojos vidriosos / enrojecidos</label>
+                <label class="checkbox-option"><input type="checkbox" name="sintomas" value="Ninguno" class="form-checkbox text-blue-600" /> Ninguno</label>
+                <label class="checkbox-option"><input type="checkbox" name="sintomas" value="Palpitaciones / aumento frecuencia cardíaca" class="form-checkbox text-blue-600" /> Palpitaciones / aumento frecuencia cardíaca</label>
+                <label class="checkbox-option"><input type="checkbox" name="sintomas" value="Otro" id="otroSintomaCheckbox" class="form-checkbox text-blue-600" /> Otro (explique)</label>
+            </div>
+            <textarea id="otroSintomaExplica" class="shadow-sm border rounded-lg w-full py-2 px-3 text-gray-700 mt-2 hidden" placeholder="Explica otros síntomas..."></textarea>
+        </section>
+
+        <!-- Question 11 -->
+        <section class="question-group">
+            <p class="text-lg font-medium mb-3 text-gray-800">11. ¿Está usted casado/a o en una relación sentimental con otra persona?</p>
+            <div class="flex space-x-4 mb-2">
+                <label class="radio-option"><input type="radio" name="relacionSentimental" value="Si" class="form-radio text-blue-600" /> Sí</label>
+                <label class="radio-option"><input type="radio" name="relacionSentimental" value="No" class="form-radio text-blue-600" /> No</label>
+            </div>
+            <p class="text-lg font-medium mb-3 text-gray-800">¿Está usted pasando por un proceso de separación o divorcio?</p>
+            <div class="flex space-x-4 mb-2">
+                <label class="radio-option"><input type="radio" name="procesoSeparacion" value="Si" class="form-radio text-blue-600" /> Sí</label>
+                <label class="radio-option"><input type="radio" name="procesoSeparacion" value="No" class="form-radio text-blue-600" /> No</label>
+            </div>
+
+            <div id="relacionesFollowUp" class="mt-4 hidden">
+                <p class="text-base font-medium mb-2 text-gray-700">a) ¿Ha atravesado problemas importantes en su matrimonio u otras relaciones personales como conflictos graves, abuso, infidelidad, abuso de sustancias y/o problemas financieros?</p>
+                <div class="flex flex-col space-y-2 mb-3">
+                    <label class="radio-option"><input type="radio" name="problemasImportantesRelacion" value="Si" class="form-radio text-blue-600" /> Sí</label>
+                    <label class="radio-option"><input type="radio" name="problemasImportantesRelacion" value="No" class="form-radio text-blue-600" /> No</label>
+                </div>
+                <p class="text-base font-medium mb-2 text-gray-700">b) ¿Considera que podría tener algún tipo de conflicto o problema importante con su pareja u otra persona de su entorno en los próximos meses?</p>
+                <div class="flex flex-col space-y-2">
+                    <label class="radio-option"><input type="radio" name="conflictoFuturoRelacion" value="Si" class="form-radio text-blue-600" /> Sí</label>
+                    <label class="radio-option"><input type="radio" name="conflictoFuturoRelacion" value="No" class="form-radio text-blue-600" /> No</label>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question 12 -->
+        <section class="question-group">
+            <p class="text-lg font-medium mb-3 text-gray-800">12. Durante el ÚLTIMO AÑO, ¿Ha recibido asistencia médica o psicológica derivado de trastornos de estrés (ej. Trastorno de estrés postraumático, depresión, ansiedad o abuso de alcohol u otras sustancias)?</p>
+            <div class="flex flex-col space-y-2">
+                <label class="radio-option"><input type="radio" name="asistenciaEstres" value="No" class="form-radio text-blue-600" /> No</label>
+                <label class="radio-option"><input type="radio" name="asistenciaEstres" value="Si" class="form-radio text-blue-600" /> Sí. (Por favor, explique)</label>
+            </div>
+            <textarea id="asistenciaEstresExplica" class="shadow-sm border rounded-lg w-full py-2 px-3 text-gray-700 mt-2 hidden" placeholder="Explica la asistencia recibida..."></textarea>
+        </section>
+
+        <!-- Question 13 -->
+        <section class="question-group">
+            <p class="text-lg font-medium mb-3 text-gray-800">13. ¿Está tomando ACTUALMENTE algún tipo de medicación o complemento (incluyendo suplementos naturales de hierbas) para dormir, aliviar el dolor, reducir el estrés o ansiedad o algún tipo de problema mental?</p>
+            <div class="flex flex-col space-y-2">
+                <label class="radio-option"><input type="radio" name="medicacionComplemento" value="No" class="form-radio text-blue-600" /> No</label>
+                <label class="radio-option"><input type="radio" name="medicacionComplemento" value="Si" class="form-radio text-blue-600" /> Sí. (Por favor, enumere)</label>
+            </div>
+            <textarea id="medicacionComplementoExplica" class="shadow-sm border rounded-lg w-full py-2 px-3 text-gray-700 mt-2 hidden" placeholder="Enumera la medicación o complementos..."></textarea>
+        </section>
+
+        <!-- Question 14 -->
+        <section class="question-group">
+            <p class="text-lg font-medium mb-3 text-gray-800">14. a) ¿Con qué frecuencia toma bebidas que contienen alcohol?</p>
+            <div class="flex flex-col space-y-2">
+                <label class="radio-option"><input type="radio" name="frecuenciaAlcohol" value="Nunca" class="form-radio text-blue-600" /> Nunca</label>
+                <label class="radio-option"><input type="radio" name="frecuenciaAlcohol" value="Una vez al mes o menos" class="form-radio text-blue-600" /> Una vez al mes o menos</label>
+                <label class="radio-option"><input type="radio" name="frecuenciaAlcohol" value="2-4 veces/mes" class="form-radio text-blue-600" /> 2-4 veces/mes</label>
+                <label class="radio-option"><input type="radio" name="frecuenciaAlcohol" value="2-3 veces/semana" class="form-radio text-blue-600" /> 2-3 veces/semana</label>
+                <label class="radio-option"><input type="radio" name="frecuenciaAlcohol" value="4 o más veces/semana" class="form-radio text-blue-600" /> 4 o más veces/semana</label>
+            </div>
+            <p class="text-lg font-medium mb-3 mt-4 text-gray-800">b) ¿Cuántas bebidas alcohólicas toma en un día normal (Ej. Entre semana)?</p>
+            <div class="flex flex-col space-y-2">
+                <label class="radio-option"><input type="radio" name="cantidadAlcohol" value="1 o 2" class="form-radio text-blue-600" /> 1 ó 2</label>
+                <label class="radio-option"><input type="radio" name="cantidadAlcohol" value="3 o 4" class="form-radio text-blue-600" /> 3 ó 4</label>
+                <label class="radio-option"><input type="radio" name="cantidadAlcohol" value="5 o 6" class="form-radio text-blue-600" /> 5 ó 6</label>
+                <label class="radio-option"><input type="radio" name="cantidadAlcohol" value="Entre 7 y 9" class="form-radio text-blue-600" /> Entre 7 y 9</label>
+                <label class="radio-option"><input type="radio" name="cantidadAlcohol" value="10 o mas" class="form-radio text-blue-600" /> 10 ó más</label>
+            </div>
+        </section>
+
+        <!-- Question 15 -->
+        <section class="question-group">
+            <p class="text-lg font-medium mb-3 text-gray-800">15. Durante EL ÚLTIMO MES, ¿Has vivido alguna experiencia que le haya resultado tan horrible, peligrosa o amenazante que…:</p>
+            <div class="grid grid-cols-1 gap-2 mb-4">
+                <div class="flex items-center justify-between">
+                    <p class="text-base text-gray-700">a. Has tenido pesadillas o pensamientos recurrentes sobre ello</p>
+                    <div class="flex space-x-4">
+                        <label class="radio-option"><input type="radio" name="pesadillas" value="SI" class="form-radio text-blue-600" /> SI</label>
+                        <label class="radio-option"><input type="radio" name="pesadillas" value="NO" class="form-radio text-blue-600" /> NO</label>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between">
+                    <p class="text-base text-gray-700">b. Has intentado no pensar en ello o has evitado situaciones que te recordaban el suceso</p>
+                    <div class="flex space-x-4">
+                        <label class="radio-option"><input type="radio" name="evitarPensamientos" value="SI" class="form-radio text-blue-600" /> SI</label>
+                        <label class="radio-option"><input type="radio" name="evitarPensamientos" value="NO" class="form-radio text-blue-600" /> NO</label>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between">
+                    <p class="text-base text-gray-700">c. Te has sentido constantemente en estado de alerta, vigilante o te asustabas fácilmente</p>
+                    <div class="flex space-x-4">
+                        <label class="radio-option"><input type="radio" name="estadoAlerta" value="SI" class="form-radio text-blue-600" /> SI</label>
+                        <label class="radio-option"><input type="radio" name="estadoAlerta" value="NO" class="form-radio text-blue-600" /> NO</label>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between">
+                    <p class="text-base text-gray-700">d. Te has sentido distraído o desconectado de tu entorno (actividades y/o personas)</p>
+                    <div class="flex space-x-4">
+                        <label class="radio-option"><input type="radio" name="distraidoDesconectado" value="SI" class="form-radio text-blue-600" /> SI</label>
+                        <label class="radio-option"><input type="radio" name="distraidoDesconectado" value="NO" class="form-radio text-blue-600" /> NO</label>
+                    </div>
+                </div>
+            </div>
+
+            <div id="q15Table" class="mt-6 p-4 border rounded-lg bg-blue-50 hidden">
+                <p class="text-sm italic mb-4 text-gray-700">NOTA: Si has contestado afirmativamente 2 o más ítems de la pregunta 15 (a-d), responde a las preguntas de la siguiente tabla, si no, continúa con la pregunta 16.</p>
+                <p class="text-lg font-medium mb-4 text-gray-800">En esta tabla encontrarás una serie de reacciones que pueden experimentar las personas que están viviendo una situación estresante. Lee detenidamente cada pregunta y marca en qué grado te ha afectado esa situación durante EL ÚLTIMO MES.</p>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white rounded-lg shadow-sm">
+                        <thead>
+                            <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                                <th class="py-3 px-6 text-left">Reacción</th>
+                                <th class="py-3 px-2 text-center">Nada</th>
+                                <th class="py-3 px-2 text-center">Un poco</th>
+                                <th class="py-3 px-2 text-center">Algo</th>
+                                <th class="py-3 px-2 text-center">Bastante</th>
+                                <th class="py-3 px-2 text-center">Mucho</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-700 text-sm">
+                            <!-- Rows for e-u -->
+                            <!-- Example row, repeat for each (e.g., f, g, h...) -->
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left whitespace-normal">e. Imágenes o pensamientos recurrentes sobre una experiencia traumática pasada</td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_e" value="Nada" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_e" value="Un poco" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_e" value="Algo" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_e" value="Bastante" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_e" value="Mucho" class="form-radio text-blue-600" /></td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left whitespace-normal">f. Sueños desagradables o pesadillas sobre la experiencia traumática</td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_f" value="Nada" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_f" value="Un poco" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_f" value="Algo" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_f" value="Bastante" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_f" value="Mucho" class="form-radio text-blue-600" /></td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left whitespace-normal">g. Sentir o actuar como si la experiencia traumática fuera a repetirse de nuevo (o como si la revivieras)</td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_g" value="Nada" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_g" value="Un poco" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_g" value="Algo" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_g" value="Bastante" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_g" value="Mucho" class="form-radio text-blue-600" /></td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left whitespace-normal">h. Sentirte molesto o preocupado cuando algo te recuerda la experiencia traumática</td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_h" value="Nada" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_h" value="Un poco" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_h" value="Algo" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_h" value="Bastante" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_h" value="Mucho" class="form-radio text-blue-600" /></td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left whitespace-normal">i. Tener reacciones físicas (palpitaciones, sudoración, dificultad para respirar,...) cuando algo te recuerda la experiencia traumática</td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_i" value="Nada" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_i" value="Un poco" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_i" value="Algo" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_i" value="Bastante" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_i" value="Mucho" class="form-radio text-blue-600" /></td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left whitespace-normal">j. Evitar pensar o hablar sobre el suceso traumático</td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_j" value="Nada" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_j" value="Un poco" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_j" value="Algo" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_j" value="Bastante" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_j" value="Mucho" class="form-radio text-blue-600" /></td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left whitespace-normal">k. Evitar actividades o situaciones que te recuerdan la experiencia traumática</td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_k" value="Nada" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_k" value="Un poco" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_k" value="Algo" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_k" value="Bastante" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_k" value="Mucho" class="form-radio text-blue-600" /></td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left whitespace-normal">l. Dificultad para recordar aspectos o partes importantes de la experiencia traumática</td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_l" value="Nada" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_l" value="Un poco" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_l" value="Algo" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_l" value="Bastante" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_l" value="Mucho" class="form-radio text-blue-600" /></td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left whitespace-normal">m.Pérdida de interés en cosas o actividades que solías disfrutar</td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_m" value="Nada" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_m" value="Un poco" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_m" value="Algo" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_m" value="Bastante" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_m" value="Mucho" class="form-radio text-blue-600" /></td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left whitespace-normal">n.Distanciamiento social y aislamiento</td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_n" value="Nada" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_n" value="Un poco" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_n" value="Algo" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_n" value="Bastante" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_n" value="Mucho" class="form-radio text-blue-600" /></td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left whitespace-normal">o. Sentimiento de embotamiento emocional o incapacidad de experimentar sentimientos de amor hacia las personas cercanas</td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_o" value="Nada" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_o" value="Un poco" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_o" value="Algo" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_o" value="Bastante" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_o" value="Mucho" class="form-radio text-blue-600" /></td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left whitespace-normal">p. Sentir que tu futuro será truncado</td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_p" value="Nada" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_p" value="Un poco" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_p" value="Algo" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_p" value="Bastante" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_p" value="Mucho" class="form-radio text-blue-600" /></td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left whitespace-normal">q.Problemas para conciliar el sueño o mantenerse despierto</td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_q" value="Nada" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_q" value="Un poco" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_q" value="Algo" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_q" value="Bastante" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_q" value="Mucho" class="form-radio text-blue-600" /></td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left whitespace-normal">r. Sentirse irritable o tener ataques de ira</td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_r" value="Nada" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_r" value="Un poco" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_r" value="Algo" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_r" value="Bastante" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_r" value="Mucho" class="form-radio text-blue-600" /></td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left whitespace-normal">s. Tener problemas de concentración</td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_s" value="Nada" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_s" value="Un poco" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_s" value="Algo" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_s" value="Bastante" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_s" value="Mucho" class="form-radio text-blue-600" /></td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left whitespace-normal">t. Sentir que estás en alerta, en guardia o vigilante</td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_t" value="Nada" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_t" value="Un poco" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_t" value="Algo" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_t" value="Bastante" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_t" value="Mucho" class="form-radio text-blue-600" /></td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left whitespace-normal">u. Sentirse nervioso o asustarse con facilidad</td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_u" value="Nada" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_u" value="Un poco" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_u" value="Algo" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_u" value="Bastante" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_u" value="Mucho" class="form-radio text-blue-600" /></td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left whitespace-normal">v. ¿En qué medida estos problemas (de la “e” a la “u”) han afectado a tu trabajo, a tu día a día en casa o a tus relaciones personales?</td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_v" value="Nada" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_v" value="Un poco" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_v" value="Algo" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_v" value="Bastante" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q15_v" value="Mucho" class="form-radio text-blue-600" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question 16 -->
+        <section class="question-group">
+            <p class="text-lg font-medium mb-3 text-gray-800">16. Durante las últimas 2 SEMANAS, ¿Cuánto te han preocupado los siguientes problemas?</p>
+            <div class="grid grid-cols-1 gap-2 mb-4">
+                <div class="flex items-center justify-between">
+                    <p class="text-base text-gray-700">a. Pérdida de interés o dificultad para disfrutar de las cosas</p>
+                    <div class="flex space-x-4">
+                        <label class="radio-option"><input type="radio" name="q16_a" value="Nunca" class="form-radio text-blue-600" /> Nunca</label>
+                        <label class="radio-option"><input type="radio" name="q16_a" value="Algunos días" class="form-radio text-blue-600" /> Algunos días</label>
+                        <label class="radio-option"><input type="radio" name="q16_a" value="Más de la mitad de los días" class="form-radio text-blue-600" /> Más de la mitad de los días</label>
+                        <label class="radio-option"><input type="radio" name="q16_a" value="Casi todos los días" class="form-radio text-blue-600" /> Casi todos los días</label>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between">
+                    <p class="text-base text-gray-700">b. Sentirse deprimido, desesperanzado o bajo de ánimo</p>
+                    <div class="flex space-x-4">
+                        <label class="radio-option"><input type="radio" name="q16_b" value="Nunca" class="form-radio text-blue-600" /> Nunca</label>
+                        <label class="radio-option"><input type="radio" name="q16_b" value="Algunos días" class="form-radio text-blue-600" /> Algunos días</label>
+                        <label class="radio-option"><input type="radio" name="q16_b" value="Más de la mitad de los días" class="form-radio text-blue-600" /> Más de la mitad de los días</label>
+                        <label class="radio-option"><input type="radio" name="q16_b" value="Casi todos los días" class="form-radio text-blue-600" /> Casi todos los días</label>
+                    </div>
+                </div>
+            </div>
+
+            <div id="q16Table" class="mt-6 p-4 border rounded-lg bg-blue-50 hidden">
+                <p class="text-sm italic mb-4 text-gray-700">NOTA: Si en alguna de las preguntas anteriores (16a o 16b) has contestado “Más de la mitad de los días” o “casi todos los días”, responde a las preguntas de la siguiente tabla. Si no, continúa en la pregunta 17.</p>
+                <p class="text-lg font-medium mb-4 text-gray-800">Durante las 2 ÚLTIMAS SEMANAS, ¿Con qué frecuencia has sentido los siguientes problemas?</p>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white rounded-lg shadow-sm">
+                        <thead>
+                            <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                                <th class="py-3 px-6 text-left">Problema</th>
+                                <th class="py-3 px-2 text-center">Nunca</th>
+                                <th class="py-3 px-2 text-center">Algunos días</th>
+                                <th class="py-3 px-2 text-center">La mayoría de los días</th>
+                                <th class="py-3 px-2 text-center">Casi todos los días</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-700 text-sm">
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left whitespace-normal">c.Dificultad para dormirse o mantenerse despierto, o dormir demasiado</td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q16_c" value="Nunca" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q16_c" value="Algunos días" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q16_c" value="La mayoría de los días" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q16_c" value="Casi todos los días" class="form-radio text-blue-600" /></td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left whitespace-normal">d. Sentirse cansado o con poca energía</td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q16_d" value="Nunca" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q16_d" value="Algunos días" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q16_d" value="La mayoría de los días" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q16_d" value="Casi todos los días" class="form-radio text-blue-600" /></td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left whitespace-normal">e. Falta de apetito o comer más de lo habitual</td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q16_e" value="Nunca" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q16_e" value="Algunos días" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q16_e" value="La mayoría de los días" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q16_e" value="Casi todos los días" class="form-radio text-blue-600" /></td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left whitespace-normal">f. Sentirte mal contigo mismo (o sentir que eres un fracaso y vas a fallarte a ti mismo y a los demás)</td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q16_f" value="Nunca" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q16_f" value="Algunos días" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q16_f" value="La mayoría de los días" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q16_f" value="Casi todos los días" class="form-radio text-blue-600" /></td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left whitespace-normal">g. Dificultad para concentrarte en tareas sencillas (como leer el periódico o ver la televisión)</td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q16_g" value="Nunca" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q16_g" value="Algunos días" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q16_g" value="La mayoría de los días" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q16_g" value="Casi todos los días" class="form-radio text-blue-600" /></td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left whitespace-normal">h. Moverte o hablar muy despacio, hasta el punto de que los demás lo notan. O al contrario, estar muy inquieto y “de un lado para otro”</td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q16_h" value="Nunca" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q16_h" value="Algunos días" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q16_h" value="La mayoría de los días" class="form-radio text-blue-600" /></td>
+                                <td class="py-3 px-2 text-center"><input type="radio" name="q16_h" value="Casi todos los días" class="form-radio text-blue-600" /></td>
+                            </tr>
+                            <!-- Note: The PDF has 'v' question here which refers to Q15's e-u. I'll omit it from this Q16 table to avoid confusion and keep it tied to Q15. -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question 17 -->
+        <section class="question-group">
+            <p class="text-lg font-medium mb-3 text-gray-800">17. Durante EL ÚLTIMO MES:</p>
+            <div class="grid grid-cols-1 gap-2 mb-4">
+                <div class="flex items-center justify-between">
+                    <p class="text-base text-gray-700">a. ¿Has pensado que estarías mejor muerto o has deseado estarlo?</p>
+                    <div class="flex space-x-4">
+                        <label class="radio-option"><input type="radio" name="q17_a" value="SI" class="form-radio text-blue-600" /> SI</label>
+                        <label class="radio-option"><input type="radio" name="q17_a" value="NO" class="form-radio text-blue-600" /> NO</label>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between">
+                    <p class="text-base text-gray-700">b. ¿Has querido hacerte daño a ti mismo?</p>
+                    <div class="flex space-x-4">
+                        <label class="radio-option"><input type="radio" name="q17_b" value="SI" class="form-radio text-blue-600" /> SI</label>
+                        <label class="radio-option"><input type="radio" name="q17_b" value="NO" class="form-radio text-blue-600" /> NO</label>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between">
+                    <p class="text-base text-gray-700">c. ¿Has pensado en el suicidio?</p>
+                    <div class="flex space-x-4">
+                        <label class="radio-option"><input type="radio" name="q17_c" value="SI" class="form-radio text-blue-600" /> SI</label>
+                        <label class="radio-option"><input type="radio" name="q17_c" value="NO" class="form-radio text-blue-600" /> NO</label>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between">
+                    <p class="text-base text-gray-700">d. ¿Has intentado suicidarte?</p>
+                    <div class="flex space-x-4">
+                        <label class="radio-option"><input type="radio" name="q17_d" value="SI" class="form-radio text-blue-600" /> SI</label>
+                        <label class="radio-option"><input type="radio" name="q17_d" value="NO" class="form-radio text-blue-600" /> NO</label>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between">
+                    <p class="text-base text-gray-700">e. ¿Has tenido un plan para quitarte la vida?</p>
+                    <div class="flex space-x-4">
+                        <label class="radio-option"><input type="radio" name="q17_e" value="SI" class="form-radio text-blue-600" /> SI</label>
+                        <label class="radio-option"><input type="radio" name="q17_e" value="NO" class="form-radio text-blue-600" /> NO</label>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between">
+                    <p class="text-base text-gray-700">f. ¿Alguna vez en tu vida has tenido un intento de suicidio?</p>
+                    <div class="flex space-x-4">
+                        <label class="radio-option"><input type="radio" name="q17_f" value="SI" class="form-radio text-blue-600" /> SI</label>
+                        <label class="radio-option"><input type="radio" name="q17_f" value="NO" class="form-radio text-blue-600" /> NO</label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question 18 -->
+        <section class="question-group">
+            <p class="text-lg font-medium mb-3 text-gray-800">18. Durante EL ÚLTIMO MES, y hasta ahora:</p>
+            <div class="grid grid-cols-1 gap-2 mb-4">
+                <div class="flex items-center justify-between">
+                    <p class="text-base text-gray-700">a. ¿Has tenido dificultad para quedarte dormido o mantenerte despierto?</p>
+                    <div class="flex space-x-4">
+                        <label class="radio-option"><input type="radio" name="q18_a" value="SI" class="form-radio text-blue-600" /> SI</label>
+                        <label class="radio-option"><input type="radio" name="q18_a" value="NO" class="form-radio text-blue-600" /> NO</label>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between">
+                    <p class="text-base text-gray-700">b. ¿Has sentido que tienes falta de sueño o sueño poco reparador?</p>
+                    <div class="flex space-x-4">
+                        <label class="radio-option"><input type="radio" name="q18_b" value="SI" class="form-radio text-blue-600" /> SI</label>
+                        <label class="radio-option"><input type="radio" name="q18_b" value="NO" class="form-radio text-blue-600" /> NO</label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question 19 -->
+        <section class="question-group">
+            <p class="text-lg font-medium mb-3 text-gray-800">19. Durante EL ÚLTIMO MES, y hasta ahora:</p>
+            <div class="grid grid-cols-1 gap-2 mb-4">
+                <div class="flex items-center justify-between">
+                    <p class="text-base text-gray-700">a. ¿Has sentido que no podías controlar el impulso de agredir o herir a otras personas como amigos o compañeros de trabajo?</p>
+                    <div class="flex space-x-4">
+                        <label class="radio-option"><input type="radio" name="q19_a" value="SI" class="form-radio text-blue-600" /> SI</label>
+                        <label class="radio-option"><input type="radio" name="q19_a" value="NO" class="form-radio text-blue-600" /> NO</label>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between">
+                    <p class="text-base text-gray-700">b. ¿Has sentido que estabas a punto de perder el control de tu ira e impulsos?</p>
+                    <div class="flex space-x-4">
+                        <label class="radio-option"><input type="radio" name="q19_b" value="SI" class="form-radio text-blue-600" /> SI</label>
+                        <label class="radio-option"><input type="radio" name="q19_b" value="NO" class="form-radio text-blue-600" /> NO</label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question 20 -->
+        <section class="question-group">
+            <p class="text-lg font-medium mb-3 text-gray-800">20. ¿Estás preocupado por tu salud porque consideras que estuviste expuesto a algo en el ambiente mientras estabas navegando?</p>
+            <div class="flex flex-col space-y-2">
+                <label class="radio-option"><input type="radio" name="preocupacionSaludExposicion" value="No" class="form-radio text-blue-600" /> No</label>
+                <label class="radio-option"><input type="radio" name="preocupacionSaludExposicion" value="Si" class="form-radio text-blue-600" /> Sí. (Explique)</label>
+            </div>
+            <textarea id="preocupacionSaludExposicionExplica" class="shadow-sm border rounded-lg w-full py-2 px-3 text-gray-700 mt-2 hidden" placeholder="Explica tu preocupación..."></textarea>
+        </section>
+
+        <!-- Question 21 -->
+        <section class="question-group">
+            <p class="text-lg font-medium mb-3 text-gray-800">21. ¿Te gustaría pedir una consulta con un psicólogo u otro profesional sanitario para tratar algún tema que te preocupe o recibir información/asesoramiento?</p>
+            <div class="flex flex-col space-y-2">
+                <label class="radio-option"><input type="radio" name="consultaProfesional" value="Si" class="form-radio text-blue-600" /> Sí</label>
+                <label class="radio-option"><input type="radio" name="consultaProfesional" value="No" class="form-radio text-blue-600" /> No</label>
+            </div>
+        </section>
+
+        <!-- Question 22 -->
+        <section class="question-group">
+            <p class="text-lg font-medium mb-3 text-gray-800">22. ¿Te gustaría recibir asistencia o asesoramiento para tratar un problema familiar?</p>
+            <div class="flex flex-col space-y-2">
+                <label class="radio-option"><input type="radio" name="asistenciaFamiliar" value="Si" class="form-radio text-blue-600" /> Sí</label>
+                <label class="radio-option"><input type="radio" name="asistenciaFamiliar" value="No" class="form-radio text-blue-600" /> No</label>
+            </div>
+        </section>
 
         <button
             id="enviar"
-            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300 transform hover:scale-105"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300 transform hover:scale-105 text-lg"
         >
-            Enviar
+            Enviar Cuestionario
         </button>
     </div>
 
@@ -125,37 +804,357 @@
         const supabaseUrl = 'https://syscmsennlikqzikbznl.supabase.co';
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN5c2Ntc2Vubmxpa3F6aWtiem5sIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA0MTQ0MDcsImV4cCI6MjA2NTk5MDQwN30.I5cQJNCEFtF1NAIypmgMBYAIiVnSyhu_7C1WhKzCVxE';
 
-        // Correct Supabase client initialization:
-        // Access window.supabase to get the global object provided by the CDN,
-        // then call createClient from it.
         const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-        document.getElementById('enviar').addEventListener('click', async () => {
-            const dni = document.getElementById('dni').value.trim();
-            const p1 = document.getElementById('pregunta1').value.trim();
-            const p2 = document.getElementById('pregunta2').value.trim();
+        // Helper to get selected radio value by name
+        function getRadioValue(name) {
+            const radios = document.getElementsByName(name);
+            for (const radio of radios) {
+                if (radio.checked) {
+                    return radio.value;
+                }
+            }
+            return null;
+        }
 
-            if (!dni || !p1 || !p2) {
-                showMessage('Rellena todos los campos.', 'error');
+        // Helper to get selected checkbox values by name
+        function getCheckboxValues(name) {
+            const checkboxes = document.getElementsByName(name);
+            const values = [];
+            for (const checkbox of checkboxes) {
+                if (checkbox.checked) {
+                    values.push(checkbox.value);
+                }
+            }
+            return values;
+        }
+
+        // Event listeners for conditional visibility
+        document.addEventListener('DOMContentLoaded', () => {
+            // Q2: Salud Comparada
+            document.querySelectorAll('input[name="saludComparada"]').forEach(radio => {
+                radio.addEventListener('change', (event) => {
+                    const textarea = document.getElementById('saludComparadaPorQue');
+                    if (event.target.value.includes('peor')) {
+                        textarea.classList.remove('hidden');
+                    } else {
+                        textarea.classList.add('hidden');
+                        textarea.value = ''; // Clear if hidden
+                    }
+                });
+            });
+
+            // Q7: Lesión/Accidente
+            document.querySelectorAll('input[name="lesionAccidente"]').forEach(radio => {
+                radio.addEventListener('change', (event) => {
+                    const followUpDiv = document.getElementById('lesionAccidenteFollowUp');
+                    if (event.target.value === 'Si') {
+                        followUpDiv.classList.remove('hidden');
+                    } else {
+                        followUpDiv.classList.add('hidden');
+                        document.querySelectorAll('input[name="problemasLesion"]').forEach(r => r.checked = false); // Clear radios
+                    }
+                });
+            });
+
+            // Q9: Acontecimiento Preocupante
+            document.querySelectorAll('input[name="acontecimientoPreocupante"]').forEach(radio => {
+                radio.addEventListener('change', (event) => {
+                    const textarea = document.getElementById('acontecimientoPreocupanteExplica');
+                    const followUpDiv = document.getElementById('acontecimientoPreocupanteFollowUp');
+                    if (event.target.value === 'Si') {
+                        textarea.classList.remove('hidden');
+                        followUpDiv.classList.remove('hidden');
+                    } else {
+                        textarea.classList.add('hidden');
+                        textarea.value = '';
+                        followUpDiv.classList.add('hidden');
+                        document.querySelectorAll('input[name="tratamientoAcontecimiento"]').forEach(r => r.checked = false); // Clear radios
+                    }
+                });
+            });
+
+            // Q10: Otro Síntoma
+            document.getElementById('otroSintomaCheckbox').addEventListener('change', (event) => {
+                const textarea = document.getElementById('otroSintomaExplica');
+                if (event.target.checked) {
+                    textarea.classList.remove('hidden');
+                } else {
+                    textarea.classList.add('hidden');
+                    textarea.value = '';
+                }
+            });
+
+            // Q11: Relaciones Interpersonales
+            const relacionSentimentalRadios = document.querySelectorAll('input[name="relacionSentimental"]');
+            const procesoSeparacionRadios = document.querySelectorAll('input[name="procesoSeparacion"]');
+            const relacionesFollowUpDiv = document.getElementById('relacionesFollowUp');
+
+            const updateRelacionesFollowUpVisibility = () => {
+                const isRelacionSentimentalSi = getRadioValue('relacionSentimental') === 'Si';
+                const isProcesoSeparacionSi = getRadioValue('procesoSeparacion') === 'Si';
+
+                if (isRelacionSentimentalSi || isProcesoSeparacionSi) {
+                    relacionesFollowUpDiv.classList.remove('hidden');
+                } else {
+                    relacionesFollowUpDiv.classList.add('hidden');
+                    document.querySelectorAll('input[name="problemasImportantesRelacion"]').forEach(r => r.checked = false);
+                    document.querySelectorAll('input[name="conflictoFuturoRelacion"]').forEach(r => r.checked = false);
+                }
+            };
+
+            relacionSentimentalRadios.forEach(radio => radio.addEventListener('change', updateRelacionesFollowUpVisibility));
+            procesoSeparacionRadios.forEach(radio => radio.addEventListener('change', updateRelacionesFollowUpVisibility));
+
+
+            // Q12: Asistencia Estrés
+            document.querySelectorAll('input[name="asistenciaEstres"]').forEach(radio => {
+                radio.addEventListener('change', (event) => {
+                    const textarea = document.getElementById('asistenciaEstresExplica');
+                    if (event.target.value === 'Si') {
+                        textarea.classList.remove('hidden');
+                    } else {
+                        textarea.classList.add('hidden');
+                        textarea.value = '';
+                    }
+                });
+            });
+
+            // Q13: Medicación/Complemento
+            document.querySelectorAll('input[name="medicacionComplemento"]').forEach(radio => {
+                radio.addEventListener('change', (event) => {
+                    const textarea = document.getElementById('medicacionComplementoExplica');
+                    if (event.target.value === 'Si') {
+                        textarea.classList.remove('hidden');
+                    } else {
+                        textarea.classList.add('hidden');
+                        textarea.value = '';
+                    }
+                });
+            });
+
+            // Q15 Conditional Table (if 2 or more SI)
+            const q15_a = document.querySelector('input[name="pesadillas"][value="SI"]');
+            const q15_b = document.querySelector('input[name="evitarPensamientos"][value="SI"]');
+            const q15_c = document.querySelector('input[name="estadoAlerta"][value="SI"]');
+            const q15_d = document.querySelector('input[name="distraidoDesconectado"][value="SI"]');
+            const q15Table = document.getElementById('q15Table');
+
+            const updateQ15TableVisibility = () => {
+                let siCount = 0;
+                if (q15_a && q15_a.checked) siCount++;
+                if (q15_b && q15_b.checked) siCount++;
+                if (q15_c && q15_c.checked) siCount++;
+                if (q15_d && q15_d.checked) siCount++;
+
+                if (siCount >= 2) {
+                    q15Table.classList.remove('hidden');
+                } else {
+                    q15Table.classList.add('hidden');
+                    // Clear all radios in the Q15 table if hidden
+                    q15Table.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
+                }
+            };
+
+            document.querySelectorAll('input[name="pesadillas"], input[name="evitarPensamientos"], input[name="estadoAlerta"], input[name="distraidoDesconectado"]').forEach(radio => {
+                radio.addEventListener('change', updateQ15TableVisibility);
+            });
+
+            // Q16 Conditional Table
+            const q16_a_radios = document.querySelectorAll('input[name="q16_a"]');
+            const q16_b_radios = document.querySelectorAll('input[name="q16_b"]');
+            const q16Table = document.getElementById('q16Table');
+
+            const updateQ16TableVisibility = () => {
+                const q16_a_val = getRadioValue('q16_a');
+                const q16_b_val = getRadioValue('q16_b');
+
+                if (q16_a_val === 'Más de la mitad de los días' || q16_a_val === 'Casi todos los días' ||
+                    q16_b_val === 'Más de la mitad de los días' || q16_b_val === 'Casi todos los días') {
+                    q16Table.classList.remove('hidden');
+                } else {
+                    q16Table.classList.add('hidden');
+                    q16Table.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false); // Clear radios
+                }
+            };
+
+            q16_a_radios.forEach(radio => radio.addEventListener('change', updateQ16TableVisibility));
+            q16_b_radios.forEach(radio => radio.addEventListener('change', updateQ16TableVisibility));
+
+            // Q20: Preocupacion Salud Exposicion
+            document.querySelectorAll('input[name="preocupacionSaludExposicion"]').forEach(radio => {
+                radio.addEventListener('change', (event) => {
+                    const textarea = document.getElementById('preocupacionSaludExposicionExplica');
+                    if (event.target.value === 'Si') {
+                        textarea.classList.remove('hidden');
+                    } else {
+                        textarea.classList.add('hidden');
+                        textarea.value = '';
+                    }
+                });
+            });
+        });
+
+
+        document.getElementById('enviar').addEventListener('click', async () => {
+            // Collect all data
+            const formData = {
+                // Datos de Filiación
+                nombre: document.getElementById('nombre').value.trim(),
+                apellidos: document.getElementById('apellidos').value.trim(),
+                dni: document.getElementById('dni').value.trim(),
+                empleo: document.getElementById('empleo').value.trim(),
+                destino: document.getElementById('destino').value.trim(),
+                ultimoDespliegue: document.getElementById('ultimoDespliegue').value.trim(),
+                telefonoContacto: document.getElementById('telefonoContacto').value.trim(),
+
+                // Pregunta 1
+                saludGeneral: getRadioValue('saludGeneral'),
+
+                // Pregunta 2
+                saludComparada: getRadioValue('saludComparada'),
+                saludComparadaPorQue: document.getElementById('saludComparadaPorQue').value.trim(),
+
+                // Pregunta 3
+                problemasSalud: getRadioValue('problemasSalud'),
+
+                // Pregunta 4
+                problemasEmocionales: getRadioValue('problemasEmocionales'),
+
+                // Pregunta 5
+                visitasMedico: getRadioValue('visitasMedico'),
+
+                // Pregunta 6
+                hospitalizado: getRadioValue('hospitalizado'),
+
+                // Pregunta 7
+                lesionAccidente: getRadioValue('lesionAccidente'),
+                problemasLesion: getRadioValue('problemasLesion'),
+
+                // Pregunta 8
+                peligroMuerte: getRadioValue('peligroMuerte'),
+                vioCadaveres: getRadioValue('vioCadaveres'),
+                combateArma: getRadioValue('combateArma'),
+
+                // Pregunta 9
+                acontecimientoPreocupante: getRadioValue('acontecimientoPreocupante'),
+                acontecimientoPreocupanteExplica: document.getElementById('acontecimientoPreocupanteExplica').value.trim(),
+                tratamientoAcontecimiento: getRadioValue('tratamientoAcontecimiento'),
+
+                // Pregunta 10
+                sintomasPreocupantes: getCheckboxValues('sintomas'),
+                otroSintomaExplica: document.getElementById('otroSintomaExplica').value.trim(),
+
+                // Pregunta 11
+                relacionSentimental: getRadioValue('relacionSentimental'),
+                procesoSeparacion: getRadioValue('procesoSeparacion'),
+                problemasImportantesRelacion: getRadioValue('problemasImportantesRelacion'),
+                conflictoFuturoRelacion: getRadioValue('conflictoFuturoRelacion'),
+
+                // Pregunta 12
+                asistenciaEstres: getRadioValue('asistenciaEstres'),
+                asistenciaEstresExplica: document.getElementById('asistenciaEstresExplica').value.trim(),
+
+                // Pregunta 13
+                medicacionComplemento: getRadioValue('medicacionComplemento'),
+                medicacionComplementoExplica: document.getElementById('medicacionComplementoExplica').value.trim(),
+
+                // Pregunta 14
+                frecuenciaAlcohol: getRadioValue('frecuenciaAlcohol'),
+                cantidadAlcohol: getRadioValue('cantidadAlcohol'),
+
+                // Pregunta 15
+                q15_pesadillas: getRadioValue('pesadillas'),
+                q15_evitarPensamientos: getRadioValue('evitarPensamientos'),
+                q15_estadoAlerta: getRadioValue('estadoAlerta'),
+                q15_distraidoDesconectado: getRadioValue('distraidoDesconectado'),
+                // Q15 detailed table (e-u, v)
+                q15_e: getRadioValue('q15_e'),
+                q15_f: getRadioValue('q15_f'),
+                q15_g: getRadioValue('q15_g'),
+                q15_h: getRadioValue('q15_h'),
+                q15_i: getRadioValue('q15_i'),
+                q15_j: getRadioValue('q15_j'),
+                q15_k: getRadioValue('q15_k'),
+                q15_l: getRadioValue('q15_l'),
+                q15_m: getRadioValue('q15_m'),
+                q15_n: getRadioValue('q15_n'),
+                q15_o: getRadioValue('q15_o'),
+                q15_p: getRadioValue('q15_p'),
+                q15_q: getRadioValue('q15_q'),
+                q15_r: getRadioValue('q15_r'),
+                q15_s: getRadioValue('q15_s'),
+                q15_t: getRadioValue('q15_t'),
+                q15_u: getRadioValue('q15_u'),
+                q15_v: getRadioValue('q15_v'),
+
+                // Pregunta 16
+                q16_a: getRadioValue('q16_a'),
+                q16_b: getRadioValue('q16_b'),
+                // Q16 detailed table (c-h)
+                q16_c: getRadioValue('q16_c'),
+                q16_d: getRadioValue('q16_d'),
+                q16_e: getRadioValue('q16_e'),
+                q16_f: getRadioValue('q16_f'),
+                q16_g: getRadioValue('q16_g'),
+                q16_h: getRadioValue('q16_h'),
+
+                // Pregunta 17
+                q17_a: getRadioValue('q17_a'),
+                q17_b: getRadioValue('q17_b'),
+                q17_c: getRadioValue('q17_c'),
+                q17_d: getRadioValue('q17_d'),
+                q17_e: getRadioValue('q17_e'),
+                q17_f: getRadioValue('q17_f'),
+
+                // Pregunta 18
+                q18_a: getRadioValue('q18_a'),
+                q18_b: getRadioValue('q18_b'),
+
+                // Pregunta 19
+                q19_a: getRadioValue('q19_a'),
+                q19_b: getRadioValue('q19_b'),
+
+                // Pregunta 20
+                preocupacionSaludExposicion: getRadioValue('preocupacionSaludExposicion'),
+                preocupacionSaludExposicionExplica: document.getElementById('preocupacionSaludExposicionExplica').value.trim(),
+
+                // Pregunta 21
+                consultaProfesional: getRadioValue('consultaProfesional'),
+
+                // Pregunta 22
+                asistenciaFamiliar: getRadioValue('asistenciaFamiliar'),
+            };
+
+            // Basic validation for required fields
+            if (!formData.dni || !formData.nombre || !formData.apellidos) {
+                showMessage('Por favor, rellena al menos los campos de DNI, Nombre y Apellidos.', 'error');
                 return;
             }
 
             try {
+                // Supabase will automatically handle JSON objects.
+                // We're sending all data under a single column, e.g., 'respuestas_completas'.
+                // You'll need to ensure your Supabase table 'respuestas' has a column
+                // (e.g., of type `jsonb`) named `respuestas_completas` to store this.
                 const { data, error } = await supabaseClient
-                    .from('respuestas') // Ensure 'respuestas' is the correct table name in your Supabase project
-                    .insert([{ dni, pregunta1: p1, pregunta2: p2 }]);
+                    .from('respuestas')
+                    .insert([{ dni: formData.dni, respuestas_completas: formData }]); // Store all data in one JSONB column
 
                 if (error) {
-                    showMessage('Error al enviar la respuesta: ' + error.message, 'error');
+                    showMessage('Error al enviar el cuestionario: ' + error.message, 'error');
                 } else {
-                    showMessage('Respuesta enviada correctamente.');
-                    // Clear fields after successful submission
-                    document.getElementById('dni').value = '';
-                    document.getElementById('pregunta1').value = '';
-                    document.getElementById('pregunta2').value = '';
+                    showMessage('Cuestionario enviado correctamente. ¡Gracias por su colaboración!');
+                    // Optionally clear the form after successful submission
+                    document.querySelector('.container').reset(); // If it were a <form> tag
+                    // Manual clear for inputs outside a form tag
+                    document.querySelectorAll('input[type="text"], input[type="tel"], textarea').forEach(input => input.value = '');
+                    document.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
+                    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => checkbox.checked = false);
+                    document.querySelectorAll('.hidden').forEach(el => el.classList.add('hidden')); // Hide all conditional elements
                 }
             } catch (e) {
-                showMessage('Ha ocurrido un error inesperado: ' + e.message, 'error');
+                showMessage('Ha ocurrido un error inesperado al enviar: ' + e.message, 'error');
             }
         });
     </script>
