@@ -1,49 +1,163 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>Cuestionario Supabase</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cuestionario Supabase</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Light gray background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+        /* Custom modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* shadow-lg */
+            max-width: 90%;
+            width: 400px;
+            text-align: center;
+            position: relative;
+        }
+        .modal-close-button {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6b7280; /* text-gray-500 */
+        }
+    </style>
 </head>
-<body>
-  <h1>Cuestionario simple</h1>
+<body class="selection:bg-blue-200 selection:text-blue-900">
+    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
+        <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Cuestionario Simple</h1>
 
-  <label>DNI: <input id="dni" /></label><br/>
-  <label>Pregunta 1: <input id="pregunta1" /></label><br/>
-  <label>Pregunta 2: <input id="pregunta2" /></label><br/>
-  <button id="enviar">Enviar</button>
+        <div class="mb-4">
+            <label for="dni" class="block text-gray-700 text-sm font-semibold mb-2">DNI:</label>
+            <input
+                type="text"
+                id="dni"
+                class="shadow-sm appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+                placeholder="Introduce tu DNI"
+            />
+        </div>
 
-  <!-- Cargar librería Supabase -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+        <div class="mb-4">
+            <label for="pregunta1" class="block text-gray-700 text-sm font-semibold mb-2">Pregunta 1:</label>
+            <input
+                type="text"
+                id="pregunta1"
+                class="shadow-sm appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+                placeholder="Respuesta a la pregunta 1"
+            />
+        </div>
 
-  <script>
-    const supabaseUrl = 'https://syscmsennlikqzikbznl.supabase.co';
-    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN5c2Ntc2Vubmxpa3F6aWtiem5sIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA0MTQ0MDcsImV4cCI6MjA2NTk5MDQwN30.I5cQJNCEFtF1NAIypmgMBYAIiVnSyhu_7C1WhKzCVxE';
+        <div class="mb-6">
+            <label for="pregunta2" class="block text-gray-700 text-sm font-semibold mb-2">Pregunta 2:</label>
+            <input
+                type="text"
+                id="pregunta2"
+                class="shadow-sm appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+                placeholder="Respuesta a la pregunta 2"
+            />
+        </div>
 
-    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+        <button
+            id="enviar"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300 transform hover:scale-105"
+        >
+            Enviar
+        </button>
+    </div>
 
-    document.getElementById('enviar').addEventListener('click', async () => {
-      const dni = document.getElementById('dni').value.trim();
-      const p1 = document.getElementById('pregunta1').value.trim();
-      const p2 = document.getElementById('pregunta2').value.trim();
+    <!-- Custom message box container -->
+    <div id="messageBox"></div>
 
-      if (!dni || !p1 || !p2) {
-        alert('Rellena todos los campos');
-        return;
-      }
+    <!-- Load Supabase library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-      const { data, error } = await supabase
-        .from('respuestas')
-        .insert([{ dni, pregunta1: p1, pregunta2: p2 }]);
+    <script>
+        // Function to display custom messages
+        function showMessage(message, type = 'info') {
+            const messageBox = document.getElementById('messageBox');
+            messageBox.innerHTML = `
+                <div class="modal-overlay">
+                    <div class="modal-content">
+                        <button class="modal-close-button" onclick="closeMessage()">&times;</button>
+                        <p class="${type === 'error' ? 'text-red-600' : 'text-gray-800'} text-lg font-medium">${message}</p>
+                    </div>
+                </div>
+            `;
+            messageBox.classList.remove('hidden'); // Ensure it's visible
+        }
 
-      if (error) {
-        alert('Error: ' + error.message);
-      } else {
-        alert('Respuesta enviada');
-        document.getElementById('dni').value = '';
-        document.getElementById('pregunta1').value = '';
-        document.getElementById('pregunta2').value = '';
-      }
-    });
-  </script>
+        // Function to close the custom message box
+        function closeMessage() {
+            const messageBox = document.getElementById('messageBox');
+            messageBox.innerHTML = '';
+        }
+
+        const supabaseUrl = 'https://syscmsennlikqzikbznl.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN5c2Ntc2Vubmxpa3F6aWtiem5sIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA0MTQ0MDcsImV4cCI6MjA2NTk5MDQwN30.I5cQJNCEFtF1NAIypmgMBYAIiVnSyhu_7C1WhKzCVxE';
+
+        // Correct Supabase client initialization:
+        // Access window.supabase to get the global object provided by the CDN,
+        // then call createClient from it.
+        const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        document.getElementById('enviar').addEventListener('click', async () => {
+            const dni = document.getElementById('dni').value.trim();
+            const p1 = document.getElementById('pregunta1').value.trim();
+            const p2 = document.getElementById('pregunta2').value.trim();
+
+            if (!dni || !p1 || !p2) {
+                showMessage('Rellena todos los campos.', 'error');
+                return;
+            }
+
+            try {
+                const { data, error } = await supabaseClient
+                    .from('respuestas') // Ensure 'respuestas' is the correct table name in your Supabase project
+                    .insert([{ dni, pregunta1: p1, pregunta2: p2 }]);
+
+                if (error) {
+                    showMessage('Error al enviar la respuesta: ' + error.message, 'error');
+                } else {
+                    showMessage('Respuesta enviada correctamente.');
+                    // Clear fields after successful submission
+                    document.getElementById('dni').value = '';
+                    document.getElementById('pregunta1').value = '';
+                    document.getElementById('pregunta2').value = '';
+                }
+            } catch (e) {
+                showMessage('Ha ocurrido un error inesperado: ' + e.message, 'error');
+            }
+        });
+    </script>
 </body>
 </html>
