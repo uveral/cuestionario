@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel de Administración - Descargar Datos</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body class="selection:bg-blue-200 selection:text-blue-900">
+    <div class="container">
+        <h1 class="text-3xl font-extrabold mb-6 text-gray-900">Panel de Administración</h1>
+        <p class="mb-8 text-gray-600">Utilice el siguiente botón para descargar todas las respuestas del cuestionario en formato CSV.</p>
+
+        <button
+            id="descargarCsv"
+            type="button"
+            class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 transition duration-300 transform hover:scale-105 text-lg"
+        >
+            Descargar Datos (CSV)
+        </button>
+    </div>
+
+    <!-- Custom message box container -->
+    <div id="messageBox"></div>
+    <div id="loadingMessage" class="modal-overlay hidden">
+        <div class="modal-content">
+            <p class="text-gray-800 text-lg font-medium">Cargando y preparando datos para CSV...</p>
+        </div>
+    </div>
+
+    <!-- Load Supabase library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

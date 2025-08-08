@@ -7,85 +7,7 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6; /* Light gray background */
-            display: flex;
-            justify-content: center;
-            align-items: flex-start; /* Align to start for scrolling */
-            min-height: 100vh;
-            padding: 2rem 1rem; /* More padding top/bottom */
-            box-sizing: border-box;
-        }
-        .container {
-            background: white;
-            padding: 2rem;
-            border-radius: 0.75rem; /* rounded-xl */
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* shadow-lg */
-            width: 100%;
-            max-width: 6xl; /* Increased max-width for better question display */
-            box-sizing: border-box;
-        }
-        /* Custom modal styles */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        .modal-content {
-            background: white;
-            padding: 2rem;
-            border-radius: 0.75rem; /* rounded-xl */
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* shadow-lg */
-            max-width: 90%;
-            width: 400px;
-            text-align: center;
-            position: relative;
-        }
-        .modal-close-button {
-            position: absolute;
-            top: 0.75rem;
-            right: 0.75rem;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #6b7280; /* text-gray-500 */
-        }
-        .question-group {
-            border-bottom: 1px solid #e5e7eb; /* border-b border-gray-200 */
-            padding-bottom: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        .question-group:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-        }
-        .radio-option {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.5rem;
-        }
-        .radio-option input[type="radio"] {
-            margin-right: 0.5rem;
-        }
-        .checkbox-option {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.5rem;
-        }
-        .checkbox-option input[type="checkbox"] {
-            margin-right: 0.5rem;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body class="selection:bg-blue-200 selection:text-blue-900">
     <div class="container">
@@ -148,10 +70,10 @@
                     <label class="radio-option"><input type="radio" name="saludComparada" value="Mucho mejor antes que ahora" class="form-radio text-blue-600" /> Mucho mejor antes que ahora</label>
                     <label class="radio-option"><input type="radio" name="saludComparada" value="Algo mejor ahora que antes de navegar" class="form-radio text-blue-600" /> Algo mejor ahora que antes de navegar</label>
                     <label class="radio-option"><input type="radio" name="saludComparada" value="Mas o menos igual que antes de navegar" class="form-radio text-blue-600" /> Más o menos igual que antes de navegar</label>
-                    <label class="radio-option"><input type="radio" name="saludComparada" value="Algo peor ahora que antes de navegar. ¿Por qué?" class="form-radio text-blue-600" /> Algo peor ahora que antes de navegar. ¿Por qué?</label>
-                    <label class="radio-option"><input type="radio" name="saludComparada" value="Mucho peor ahora que antes de navegar. ¿Por qué?" class="form-radio text-blue-600" /> Mucho peor ahora que antes de navegar. ¿Por qué?</label>
+                    <label class="radio-option"><input type="radio" name="saludComparada" value="Algo peor ahora que antes de navegar. ¿Por qué?" class="form-radio text-blue-600" data-show-if-checked="saludComparadaPorQue" /> Algo peor ahora que antes de navegar. ¿Por qué?</label>
+                    <label class="radio-option"><input type="radio" name="saludComparada" value="Mucho peor ahora que antes de navegar. ¿Por qué?" class="form-radio text-blue-600" data-show-if-checked="saludComparadaPorQue" /> Mucho peor ahora que antes de navegar. ¿Por qué?</label>
                 </div>
-                <textarea id="saludComparadaPorQue" name="saludComparadaPorQue" class="shadow-sm border rounded-lg w-full py-2 px-3 text-gray-700 mt-2 hidden" placeholder="Explica por qué tu salud es peor..."></textarea>
+                <textarea id="saludComparadaPorQue" name="saludComparadaPorQue" class="conditional-content shadow-sm border rounded-lg w-full py-2 px-3 text-gray-700 mt-2 hidden" placeholder="Explica por qué tu salud es peor..."></textarea>
             </section>
 
             <!-- Question 3 -->
@@ -201,10 +123,10 @@
             <section class="question-group">
                 <p class="text-lg font-medium mb-3 text-gray-800">7. Durante la navegación, ¿Has sufrido alguna lesión o accidente en el que resultaste herido?</p>
                 <div class="flex flex-col space-y-2">
-                    <label class="radio-option"><input type="radio" name="lesionAccidente" value="Si" class="form-radio text-blue-600" /> Sí</label>
+                    <label class="radio-option"><input type="radio" name="lesionAccidente" value="Si" class="form-radio text-blue-600" data-show-if-checked="lesionAccidenteFollowUp" /> Sí</label>
                     <label class="radio-option"><input type="radio" name="lesionAccidente" value="No" class="form-radio text-blue-600" /> No</label>
                 </div>
-                <div id="lesionAccidenteFollowUp" class="mt-4 hidden">
+                <div id="lesionAccidenteFollowUp" class="conditional-content mt-4 hidden">
                     <p class="text-base font-medium mb-2 text-gray-700">Si ha respondido SÍ, ¿Continúa teniendo problemas relacionado con ello?</p>
                     <div class="flex flex-col space-y-2">
                         <label class="radio-option"><input type="radio" name="problemasLesion" value="Si" class="form-radio text-blue-600" /> Sí</label>
@@ -245,10 +167,10 @@
                 <p class="text-lg font-medium mb-3 text-gray-800">9. Durante el último mes, ¿Ha habido algún acontecimiento en su vida que le preocupe o le dificulte su trabajo, su día a día en casa o su relación con otras personas (por ejemplo, conflictos serios con los demás, problemas legales, disciplinarios o financieros)?</p>
                 <div class="flex flex-col space-y-2">
                     <label class="radio-option"><input type="radio" name="acontecimientoPreocupante" value="No" class="form-radio text-blue-600" /> No</label>
-                    <label class="radio-option"><input type="radio" name="acontecimientoPreocupante" value="Si" class="form-radio text-blue-600" /> Sí. (Por favor, explique)</label>
+                    <label class="radio-option"><input type="radio" name="acontecimientoPreocupante" value="Si" class="form-radio text-blue-600" data-show-if-checked="acontecimientoPreocupanteExplica,acontecimientoPreocupanteFollowUp" /> Sí. (Por favor, explique)</label>
                 </div>
-                <textarea id="acontecimientoPreocupanteExplica" name="acontecimientoPreocupanteExplica" class="shadow-sm border rounded-lg w-full py-2 px-3 text-gray-700 mt-2 hidden" placeholder="Explica el acontecimiento..."></textarea>
-                <div id="acontecimientoPreocupanteFollowUp" class="mt-4 hidden">
+                <textarea id="acontecimientoPreocupanteExplica" name="acontecimientoPreocupanteExplica" class="conditional-content shadow-sm border rounded-lg w-full py-2 px-3 text-gray-700 mt-2 hidden" placeholder="Explica el acontecimiento..."></textarea>
+                <div id="acontecimientoPreocupanteFollowUp" class="conditional-content mt-4 hidden">
                     <p class="text-base font-medium mb-2 text-gray-700">Si ha respondido afirmativamente: ¿Está recibiendo actualmente algún tipo de tratamiento médico o psicológico por este problema?</p>
                     <div class="flex flex-col space-y-2">
                         <label class="radio-option"><input type="radio" name="tratamientoAcontecimiento" value="Si" class="form-radio text-blue-600" /> Sí</label>
@@ -286,25 +208,25 @@
                     <label class="checkbox-option"><input type="checkbox" name="sintomas" value="Ojos vidriosos / enrojecidos" class="form-checkbox text-blue-600" /> Ojos vidriosos / enrojecidos</label>
                     <label class="checkbox-option"><input type="checkbox" name="sintomas" value="Ninguno" class="form-checkbox text-blue-600" /> Ninguno</label>
                     <label class="checkbox-option"><input type="checkbox" name="sintomas" value="Palpitaciones / aumento frecuencia cardíaca" class="form-checkbox text-blue-600" /> Palpitaciones / aumento frecuencia cardíaca</label>
-                    <label class="checkbox-option"><input type="checkbox" name="sintomas" value="Otro" id="otroSintomaCheckbox" class="form-checkbox text-blue-600" /> Otro (explique)</label>
+                    <label class="checkbox-option"><input type="checkbox" name="sintomas" value="Otro" id="otroSintomaCheckbox" class="form-checkbox text-blue-600" data-show-if-checked="otroSintomaExplica" /> Otro (explique)</label>
                 </div>
-                <textarea id="otroSintomaExplica" name="otroSintomaExplica" class="shadow-sm border rounded-lg w-full py-2 px-3 text-gray-700 mt-2 hidden" placeholder="Explica otros síntomas..."></textarea>
+                <textarea id="otroSintomaExplica" name="otroSintomaExplica" class="conditional-content shadow-sm border rounded-lg w-full py-2 px-3 text-gray-700 mt-2 hidden" placeholder="Explica otros síntomas..."></textarea>
             </section>
 
             <!-- Question 11 -->
             <section class="question-group">
                 <p class="text-lg font-medium mb-3 text-gray-800">11. ¿Está usted casado/a o en una relación sentimental con otra persona?</p>
                 <div class="flex space-x-4 mb-2">
-                    <label class="radio-option"><input type="radio" name="relacionSentimental" value="Si" class="form-radio text-blue-600" /> Sí</label>
+                    <label class="radio-option"><input type="radio" name="relacionSentimental" value="Si" class="form-radio text-blue-600" data-show-if-checked="relacionesFollowUp" /> Sí</label>
                     <label class="radio-option"><input type="radio" name="relacionSentimental" value="No" class="form-radio text-blue-600" /> No</label>
                 </div>
                 <p class="text-lg font-medium mb-3 text-gray-800">¿Está usted pasando por un proceso de separación o divorcio?</p>
                 <div class="flex space-x-4 mb-2">
-                    <label class="radio-option"><input type="radio" name="procesoSeparacion" value="Si" class="form-radio text-blue-600" /> Sí</label>
+                    <label class="radio-option"><input type="radio" name="procesoSeparacion" value="Si" class="form-radio text-blue-600" data-show-if-checked="relacionesFollowUp" /> Sí</label>
                     <label class="radio-option"><input type="radio" name="procesoSeparacion" value="No" class="form-radio text-blue-600" /> No</label>
                 </div>
 
-                <div id="relacionesFollowUp" class="mt-4 hidden">
+                <div id="relacionesFollowUp" class="conditional-content mt-4 hidden">
                     <p class="text-base font-medium mb-2 text-gray-700">a) ¿Ha atravesado problemas importantes en su matrimonio u otras relaciones personales como conflictos graves, abuso, infidelidad, abuso de sustancias y/o problemas financieros?</p>
                     <div class="flex flex-col space-y-2 mb-3">
                         <label class="radio-option"><input type="radio" name="problemasImportantesRelacion" value="Si" class="form-radio text-blue-600" /> Sí</label>
@@ -323,9 +245,9 @@
                 <p class="text-lg font-medium mb-3 text-gray-800">12. Durante el ÚLTIMO AÑO, ¿Ha recibido asistencia médica o psicológica derivado de trastornos de estrés (ej. Trastorno de estrés postraumático, depresión, ansiedad o abuso de alcohol u otras sustancias)?</p>
                 <div class="flex flex-col space-y-2">
                     <label class="radio-option"><input type="radio" name="asistenciaEstres" value="No" class="form-radio text-blue-600" /> No</label>
-                    <label class="radio-option"><input type="radio" name="asistenciaEstres" value="Si" class="form-radio text-blue-600" /> Sí. (Por favor, explique)</label>
+                    <label class="radio-option"><input type="radio" name="asistenciaEstres" value="Si" class="form-radio text-blue-600" data-show-if-checked="asistenciaEstresExplica" /> Sí. (Por favor, explique)</label>
                 </div>
-                <textarea id="asistenciaEstresExplica" name="asistenciaEstresExplica" class="shadow-sm border rounded-lg w-full py-2 px-3 text-gray-700 mt-2 hidden" placeholder="Explica la asistencia recibida..."></textarea>
+                <textarea id="asistenciaEstresExplica" name="asistenciaEstresExplica" class="conditional-content shadow-sm border rounded-lg w-full py-2 px-3 text-gray-700 mt-2 hidden" placeholder="Explica la asistencia recibida..."></textarea>
             </section>
 
             <!-- Question 13 -->
@@ -333,9 +255,9 @@
                 <p class="text-lg font-medium mb-3 text-gray-800">13. ¿Está tomando ACTUALMENTE algún tipo de medicación o complemento (incluyendo suplementos naturales de hierbas) para dormir, aliviar el dolor, reducir el estrés o ansiedad o algún tipo de problema mental?</p>
                 <div class="flex flex-col space-y-2">
                     <label class="radio-option"><input type="radio" name="medicacionComplemento" value="No" class="form-radio text-blue-600" /> No</label>
-                    <label class="radio-option"><input type="radio" name="medicacionComplemento" value="Si" class="form-radio text-blue-600" /> Sí. (Por favor, enumere)</label>
+                    <label class="radio-option"><input type="radio" name="medicacionComplemento" value="Si" class="form-radio text-blue-600" data-show-if-checked="medicacionComplementoExplica" /> Sí. (Por favor, enumere)</label>
                 </div>
-                <textarea id="medicacionComplementoExplica" name="medicacionComplementoExplica" class="shadow-sm border rounded-lg w-full py-2 px-3 text-gray-700 mt-2 hidden" placeholder="Enumera la medicación o complementos..."></textarea>
+                <textarea id="medicacionComplementoExplica" name="medicacionComplementoExplica" class="conditional-content shadow-sm border rounded-lg w-full py-2 px-3 text-gray-700 mt-2 hidden" placeholder="Enumera la medicación o complementos..."></textarea>
             </section>
 
             <!-- Question 14 -->
@@ -361,7 +283,7 @@
             <!-- Question 15 -->
             <section class="question-group">
                 <p class="text-lg font-medium mb-3 text-gray-800">15. Durante EL ÚLTIMO MES, ¿Has vivido alguna experiencia que le haya resultado tan horrible, peligrosa o amenazante que…:</p>
-                <div class="grid grid-cols-1 gap-2 mb-4">
+                <div class="grid grid-cols-1 gap-2 mb-4" data-show-if-count-gte="2" data-show-target="q15Table">
                     <div class="flex items-center justify-between">
                         <p class="text-base text-gray-700">a. Has tenido pesadillas o pensamientos recurrentes sobre ello</p>
                         <div class="flex space-x-4">
@@ -392,7 +314,7 @@
                     </div>
                 </div>
 
-                <div id="q15Table" class="mt-6 p-4 border rounded-lg bg-blue-50 hidden">
+                <div id="q15Table" class="conditional-content mt-6 p-4 border rounded-lg bg-blue-50 hidden">
                     <p class="text-sm italic mb-4 text-gray-700">NOTA: Si has contestado afirmativamente 2 o más ítems de la pregunta 15 (a-d), responde a las preguntas de la siguiente tabla, si no, continúa con la pregunta 16.</p>
                     <p class="text-lg font-medium mb-4 text-gray-800">En esta tabla encontrarás una serie de reacciones que pueden experimentar las personas que están viviendo una situación estresante. Lee detenidamente cada pregunta y marca en qué grado te ha afectado esa situación durante EL ÚLTIMO MES.</p>
                     <div class="overflow-x-auto">
@@ -563,7 +485,7 @@
             <!-- Question 16 -->
             <section class="question-group">
                 <p class="text-lg font-medium mb-3 text-gray-800">16. Durante las últimas 2 SEMANAS, ¿Cuánto te han preocupado los siguientes problemas?</p>
-                <div class="grid grid-cols-1 gap-2 mb-4">
+                <div class="grid grid-cols-1 gap-2 mb-4" data-show-if-value-in="Más de la mitad de los días,Casi todos los días" data-show-target="q16Table">
                     <div class="flex items-center justify-between">
                         <p class="text-base text-gray-700">a. Pérdida de interés o dificultad para disfrutar de las cosas</p>
                         <div class="flex space-x-4">
@@ -584,7 +506,7 @@
                     </div>
                 </div>
 
-                <div id="q16Table" class="mt-6 p-4 border rounded-lg bg-blue-50 hidden">
+                <div id="q16Table" class="conditional-content mt-6 p-4 border rounded-lg bg-blue-50 hidden">
                     <p class="text-sm italic mb-4 text-gray-700">NOTA: Si en alguna de las preguntas anteriores (16a o 16b) has contestado “Más de la mitad de los días” o “casi todos los días”, responde a las preguntas de la siguiente tabla. Si no, continúa en la pregunta 17.</p>
                     <p class="text-lg font-medium mb-4 text-gray-800">Durante las 2 ÚLTIMAS SEMANAS, ¿Con qué frecuencia has sentido los siguientes problemas?</p>
                     <div class="overflow-x-auto">
@@ -744,9 +666,9 @@
                 <p class="text-lg font-medium mb-3 text-gray-800">20. ¿Estás preocupado por tu salud porque consideras que estuviste expuesto a algo en el ambiente mientras estabas navegando?</p>
                 <div class="flex flex-col space-y-2">
                     <label class="radio-option"><input type="radio" name="preocupacionSaludExposicion" value="No" class="form-radio text-blue-600" /> No</label>
-                    <label class="radio-option"><input type="radio" name="preocupacionSaludExposicion" value="Si" class="form-radio text-blue-600" /> Sí. (Explique)</label>
+                    <label class="radio-option"><input type="radio" name="preocupacionSaludExposicion" value="Si" class="form-radio text-blue-600" data-show-if-checked="preocupacionSaludExposicionExplica" /> Sí. (Explique)</label>
                 </div>
-                <textarea id="preocupacionSaludExposicionExplica" name="preocupacionSaludExposicionExplica" class="shadow-sm border rounded-lg w-full py-2 px-3 text-gray-700 mt-2 hidden" placeholder="Explica tu preocupación..."></textarea>
+                <textarea id="preocupacionSaludExposicionExplica" name="preocupacionSaludExposicionExplica" class="conditional-content shadow-sm border rounded-lg w-full py-2 px-3 text-gray-700 mt-2 hidden" placeholder="Explica tu preocupación..."></textarea>
             </section>
 
             <!-- Question 21 -->
@@ -767,20 +689,22 @@
                 </div>
             </section>
 
-            <button
-                id="enviar"
-                type="submit"
-                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300 transform hover:scale-105 text-lg mb-4"
-            >
-                Enviar Cuestionario
-            </button>
-            <button
-                id="descargarCsv"
-                type="button"
-                class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 transition duration-300 transform hover:scale-105 text-lg"
-            >
-                Descargar Datos (CSV)
-            </button>
+            <div class="flex space-x-4">
+                <button
+                    id="enviar"
+                    type="submit"
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300 transform hover:scale-105 text-lg"
+                >
+                    Enviar Cuestionario
+                </button>
+                <button
+                    id="limpiar"
+                    type="button"
+                    class="w-full bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 transition duration-300 transform hover:scale-105 text-lg"
+                >
+                    Limpiar Formulario
+                </button>
+            </div>
         </form> <!-- Closing form tag -->
     </div>
 
@@ -795,467 +719,6 @@
 
     <!-- Load Supabase library -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <script>
-        // Function to display custom messages
-        function showMessage(message, type = 'info') {
-            const messageBox = document.getElementById('messageBox');
-            messageBox.innerHTML = `
-                <div class="modal-overlay">
-                    <div class="modal-content">
-                        <button class="modal-close-button" onclick="closeMessage()">&times;</button>
-                        <p class="${type === 'error' ? 'text-red-600' : 'text-gray-800'} text-lg font-medium">${message}</p>
-                    </div>
-                </div>
-            `;
-            messageBox.classList.remove('hidden'); // Ensure it's visible
-        }
-
-        // Function to close the custom message box
-        function closeMessage() {
-            const messageBox = document.getElementById('messageBox');
-            messageBox.innerHTML = '';
-        }
-
-        const supabaseUrl = 'https://syscmsennlikqzikbznl.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN5c2Ntc2Vubmxpa3F6aWtiem5sIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA0MTQ0MDcsImV4cCI6MjA2NTk5MDQwN30.I5cQJNCEFtF1NAIypmgMBYAIiVnSyhu_7C1WhKzCVxE';
-
-        const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
-
-        // Helper to get selected radio value by name
-        function getRadioValue(name) {
-            const radios = document.getElementsByName(name);
-            for (const radio of radios) {
-                if (radio.checked) {
-                    return radio.value;
-                }
-            }
-            return null;
-        }
-
-        // Helper to get selected checkbox values by name
-        function getCheckboxValues(name) {
-            const checkboxes = document.getElementsByName(name);
-            const values = [];
-            for (const checkbox of checkboxes) {
-                if (checkbox.checked) {
-                    values.push(checkbox.value);
-                }
-            }
-            return values;
-        }
-
-        // Event listeners for conditional visibility
-        document.addEventListener('DOMContentLoaded', () => {
-            // Q2: Salud Comparada
-            document.querySelectorAll('input[name="saludComparada"]').forEach(radio => {
-                radio.addEventListener('change', (event) => {
-                    const textarea = document.getElementById('saludComparadaPorQue');
-                    if (event.target.value.includes('peor')) {
-                        textarea.classList.remove('hidden');
-                    } else {
-                        textarea.classList.add('hidden');
-                        textarea.value = ''; // Clear if hidden
-                    }
-                });
-            });
-
-            // Q7: Lesión/Accidente
-            document.querySelectorAll('input[name="lesionAccidente"]').forEach(radio => {
-                radio.addEventListener('change', (event) => {
-                    const followUpDiv = document.getElementById('lesionAccidenteFollowUp');
-                    if (event.target.value === 'Si') {
-                        followUpDiv.classList.remove('hidden');
-                    } else {
-                        followUpDiv.classList.add('hidden');
-                        document.querySelectorAll('input[name="problemasLesion"]').forEach(r => r.checked = false); // Clear radios
-                    }
-                });
-            });
-
-            // Q9: Acontecimiento Preocupante
-            document.querySelectorAll('input[name="acontecimientoPreocupante"]').forEach(radio => {
-                radio.addEventListener('change', (event) => {
-                    const textarea = document.getElementById('acontecimientoPreocupanteExplica');
-                    const followUpDiv = document.getElementById('acontecimientoPreocupanteFollowUp');
-                    if (event.target.value === 'Si') {
-                        textarea.classList.remove('hidden');
-                        followUpDiv.classList.remove('hidden');
-                    } else {
-                        textarea.classList.add('hidden');
-                        textarea.value = '';
-                        followUpDiv.classList.add('hidden');
-                        document.querySelectorAll('input[name="tratamientoAcontecimiento"]').forEach(r => r.checked = false); // Clear radios
-                    }
-                });
-            });
-
-            // Q10: Otro Síntoma
-            document.getElementById('otroSintomaCheckbox').addEventListener('change', (event) => {
-                const textarea = document.getElementById('otroSintomaExplica');
-                if (event.target.checked) {
-                    textarea.classList.remove('hidden');
-                } else {
-                    textarea.classList.add('hidden');
-                    textarea.value = '';
-                }
-            });
-
-            // Q11: Relaciones Interpersonales
-            const relacionSentimentalRadios = document.querySelectorAll('input[name="relacionSentimental"]');
-            const procesoSeparacionRadios = document.querySelectorAll('input[name="procesoSeparacion"]');
-            const relacionesFollowUpDiv = document.getElementById('relacionesFollowUp');
-
-            const updateRelacionesFollowUpVisibility = () => {
-                const isRelacionSentimentalSi = getRadioValue('relacionSentimental') === 'Si';
-                const isProcesoSeparacionSi = getRadioValue('procesoSeparacion') === 'Si';
-
-                if (isRelacionSentimentalSi || isProcesoSeparacionSi) {
-                    relacionesFollowUpDiv.classList.remove('hidden');
-                } else {
-                    relacionesFollowUpDiv.classList.add('hidden');
-                    document.querySelectorAll('input[name="problemasImportantesRelacion"]').forEach(r => r.checked = false);
-                    document.querySelectorAll('input[name="conflictoFuturoRelacion"]').forEach(r => r.checked = false);
-                }
-            };
-
-            relacionSentimentalRadios.forEach(radio => radio.addEventListener('change', updateRelacionesFollowUpVisibility));
-            procesoSeparacionRadios.forEach(radio => radio.addEventListener('change', updateRelacionesFollowUpVisibility));
-
-
-            // Q12: Asistencia Estrés
-            document.querySelectorAll('input[name="asistenciaEstres"]').forEach(radio => {
-                radio.addEventListener('change', (event) => {
-                    const textarea = document.getElementById('asistenciaEstresExplica');
-                    if (event.target.value === 'Si') {
-                        textarea.classList.remove('hidden');
-                    } else {
-                        textarea.classList.add('hidden');
-                        textarea.value = '';
-                    }
-                });
-            });
-
-            // Q13: Medicación/Complemento
-            document.querySelectorAll('input[name="medicacionComplemento"]').forEach(radio => {
-                radio.addEventListener('change', (event) => {
-                    const textarea = document.getElementById('medicacionComplementoExplica');
-                    if (event.target.value === 'Si') {
-                        textarea.classList.remove('hidden');
-                    } else {
-                        textarea.classList.add('hidden');
-                        textarea.value = '';
-                    }
-                });
-            });
-
-            // Q15 Conditional Table (if 2 or more SI)
-            const q15_a = document.querySelector('input[name="pesadillas"][value="SI"]');
-            const q15_b = document.querySelector('input[name="evitarPensamientos"][value="SI"]');
-            const q15_c = document.querySelector('input[name="estadoAlerta"][value="SI"]');
-            const q15_d = document.querySelector('input[name="distraidoDesconectado"][value="SI"]');
-            const q15Table = document.getElementById('q15Table');
-
-            const updateQ15TableVisibility = () => {
-                let siCount = 0;
-                if (q15_a && q15_a.checked) siCount++;
-                if (q15_b && q15_b.checked) siCount++;
-                if (q15_c && q15_c.checked) siCount++;
-                if (q15_d && q15_d.checked) siCount++;
-
-                if (siCount >= 2) {
-                    q15Table.classList.remove('hidden');
-                } else {
-                    q15Table.classList.add('hidden');
-                    // Clear all radios in the Q15 table if hidden
-                    q15Table.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
-                }
-            };
-
-            document.querySelectorAll('input[name="pesadillas"], input[name="evitarPensamientos"], input[name="estadoAlerta"], input[name="distraidoDesconectado"]').forEach(radio => {
-                radio.addEventListener('change', updateQ15TableVisibility);
-            });
-
-            // Q16 Conditional Table
-            const q16_a_radios = document.querySelectorAll('input[name="q16_a"]');
-            const q16_b_radios = document.querySelectorAll('input[name="q16_b"]');
-            const q16Table = document.getElementById('q16Table');
-
-            const updateQ16TableVisibility = () => {
-                const q16_a_val = getRadioValue('q16_a');
-                const q16_b_val = getRadioValue('q16_b');
-
-                if (q16_a_val === 'Más de la mitad de los días' || q16_a_val === 'Casi todos los días' ||
-                    q16_b_val === 'Más de la mitad de los días' || q16_b_val === 'Casi todos los días') {
-                    q16Table.classList.remove('hidden');
-                } else {
-                    q16Table.classList.add('hidden');
-                    q16Table.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false); // Clear radios
-                }
-            };
-
-            q16_a_radios.forEach(radio => radio.addEventListener('change', updateQ16TableVisibility));
-            q16_b_radios.forEach(radio => radio.addEventListener('change', updateQ16TableVisibility));
-
-            // Q20: Preocupacion Salud Exposicion
-            document.querySelectorAll('input[name="preocupacionSaludExposicion"]').forEach(radio => {
-                radio.addEventListener('change', (event) => {
-                    const textarea = document.getElementById('preocupacionSaludExposicionExplica');
-                    if (event.target.value === 'Si') {
-                        textarea.classList.remove('hidden');
-                    } else {
-                        textarea.classList.add('hidden');
-                        textarea.value = '';
-                    }
-                });
-            });
-        });
-
-
-        document.getElementById('enviar').addEventListener('click', async (event) => { // Added event parameter
-            event.preventDefault(); // Prevent default form submission
-
-            // Collect all data
-            const formData = {
-                // Datos de Filiación
-                nombre: document.getElementById('nombre').value.trim(),
-                apellidos: document.getElementById('apellidos').value.trim(),
-                dni: document.getElementById('dni').value.trim(),
-                empleo: document.getElementById('empleo').value.trim(),
-                destino: document.getElementById('destino').value.trim(),
-                ultimoDespliegue: document.getElementById('ultimoDespliegue').value.trim(),
-                telefonoContacto: document.getElementById('telefonoContacto').value.trim(),
-
-                // Pregunta 1
-                saludGeneral: getRadioValue('saludGeneral'),
-
-                // Pregunta 2
-                saludComparada: getRadioValue('saludComparada'),
-                saludComparadaPorQue: document.getElementById('saludComparadaPorQue').value.trim(),
-
-                // Pregunta 3
-                problemasSalud: getRadioValue('problemasSalud'),
-
-                // Pregunta 4
-                problemasEmocionales: getRadioValue('problemasEmocionales'),
-
-                // Pregunta 5
-                visitasMedico: getRadioValue('visitasMedico'),
-
-                // Pregunta 6
-                hospitalizado: getRadioValue('hospitalizado'),
-
-                // Pregunta 7
-                lesionAccidente: getRadioValue('lesionAccidente'),
-                problemasLesion: getRadioValue('problemasLesion'),
-
-                // Pregunta 8
-                peligroMuerte: getRadioValue('peligroMuerte'),
-                vioCadaveres: getRadioValue('vioCadaveres'),
-                combateArma: getRadioValue('combateArma'),
-
-                // Pregunta 9
-                acontecimientoPreocupante: getRadioValue('acontecimientoPreocupante'),
-                acontecimientoPreocupanteExplica: document.getElementById('acontecimientoPreocupanteExplica').value.trim(),
-                tratamientoAcontecimiento: getRadioValue('tratamientoAcontecimiento'),
-
-                // Pregunta 10
-                sintomasPreocupantes: getCheckboxValues('sintomas'),
-                otroSintomaExplica: document.getElementById('otroSintomaExplica').value.trim(),
-
-                // Pregunta 11
-                relacionSentimental: getRadioValue('relacionSentimental'),
-                procesoSeparacion: getRadioValue('procesoSeparacion'),
-                problemasImportantesRelacion: getRadioValue('problemasImportantesRelacion'),
-                conflictoFuturoRelacion: getRadioValue('conflictoFuturoRelacion'),
-
-                // Pregunta 12
-                asistenciaEstres: getRadioValue('asistenciaEstres'),
-                asistenciaEstresExplica: document.getElementById('asistenciaEstresExplica').value.trim(),
-
-                // Pregunta 13
-                medicacionComplemento: getRadioValue('medicacionComplemento'),
-                medicacionComplementoExplica: document.getElementById('medicacionComplementoExplica').value.trim(),
-
-                // Pregunta 14
-                frecuenciaAlcohol: getRadioValue('frecuenciaAlcohol'),
-                cantidadAlcohol: getRadioValue('cantidadAlcohol'),
-
-                // Pregunta 15
-                q15_pesadillas: getRadioValue('pesadillas'),
-                q15_evitarPensamientos: getRadioValue('evitarPensamientos'),
-                q15_estadoAlerta: getRadioValue('estadoAlerta'),
-                q15_distraidoDesconectado: getRadioValue('distraidoDesconectado'),
-                // Q15 detailed table (e-u, v)
-                q15_e: getRadioValue('q15_e'),
-                q15_f: getRadioValue('q15_f'),
-                q15_g: getRadioValue('q15_g'),
-                q15_h: getRadioValue('q15_h'),
-                q15_i: getRadioValue('q15_i'),
-                q15_j: getRadioValue('q15_j'),
-                q15_k: getRadioValue('q15_k'),
-                q15_l: getRadioValue('q15_l'),
-                q15_m: getRadioValue('q15_m'),
-                q15_n: getRadioValue('q15_n'),
-                q15_o: getRadioValue('q15_o'),
-                q15_p: getRadioValue('q15_p'),
-                q15_q: getRadioValue('q15_q'),
-                q15_r: getRadioValue('q15_r'),
-                q15_s: getRadioValue('q15_s'),
-                q15_t: getRadioValue('q15_t'),
-                q15_u: getRadioValue('q15_u'),
-                q15_v: getRadioValue('q15_v'),
-
-                // Pregunta 16
-                q16_a: getRadioValue('q16_a'),
-                q16_b: getRadioValue('q16_b'),
-                // Q16 detailed table (c-h)
-                q16_c: getRadioValue('q16_c'),
-                q16_d: getRadioValue('q16_d'),
-                q16_e: getRadioValue('q16_e'),
-                q16_f: getRadioValue('q16_f'),
-                q16_g: getRadioValue('q16_g'),
-                q16_h: getRadioValue('q16_h'),
-
-                // Pregunta 17
-                q17_a: getRadioValue('q17_a'),
-                q17_b: getRadioValue('q17_b'),
-                q17_c: getRadioValue('q17_c'),
-                q17_d: getRadioValue('q17_d'),
-                q17_e: getRadioValue('q17_e'),
-                q17_f: getRadioValue('q17_f'),
-
-                // Pregunta 18
-                q18_a: getRadioValue('q18_a'),
-                q18_b: getRadioValue('q18_b'),
-
-                // Pregunta 19
-                q19_a: getRadioValue('q19_a'),
-                q19_b: getRadioValue('q19_b'),
-
-                // Pregunta 20
-                preocupacionSaludExposicion: getRadioValue('preocupacionSaludExposicion'),
-                preocupacionSaludExposicionExplica: document.getElementById('preocupacionSaludExposicionExplica').value.trim(),
-
-                // Pregunta 21
-                consultaProfesional: getRadioValue('consultaProfesional'),
-
-                // Pregunta 22
-                asistenciaFamiliar: getRadioValue('asistenciaFamiliar'),
-            };
-
-            // Basic validation for required fields
-            if (!formData.dni || !formData.nombre || !formData.apellidos) {
-                showMessage('Por favor, rellena al menos los campos de DNI, Nombre y Apellidos.', 'error');
-                return;
-            }
-
-            try {
-                const { data, error } = await supabaseClient
-                    .from('respuestas')
-                    .insert([{ dni: formData.dni, respuestas_completas: formData }]); // Store all data in one JSONB column
-
-                if (error) {
-                    showMessage('Error al enviar el cuestionario: ' + error.message, 'error');
-                } else {
-                    showMessage('Cuestionario enviado correctamente. ¡Gracias por su colaboración!');
-                    // Reset the form using the form's reset method
-                    document.getElementById('questionnaireForm').reset();
-                    // Manually hide conditional elements as form.reset() doesn't handle hidden classes
-                    document.getElementById('saludComparadaPorQue').classList.add('hidden');
-                    document.getElementById('lesionAccidenteFollowUp').classList.add('hidden');
-                    document.getElementById('acontecimientoPreocupanteExplica').classList.add('hidden');
-                    document.getElementById('acontecimientoPreocupanteFollowUp').classList.add('hidden');
-                    document.getElementById('otroSintomaExplica').classList.add('hidden');
-                    document.getElementById('relacionesFollowUp').classList.add('hidden');
-                    document.getElementById('asistenciaEstresExplica').classList.add('hidden');
-                    document.getElementById('medicacionComplementoExplica').classList.add('hidden');
-                    document.getElementById('q15Table').classList.add('hidden');
-                    document.getElementById('q16Table').classList.add('hidden');
-                    document.getElementById('preocupacionSaludExposicionExplica').classList.add('hidden');
-                }
-            } catch (e) {
-                showMessage('Ha ocurrido un error inesperado al enviar: ' + e.message, 'error');
-            }
-        });
-
-        document.getElementById('descargarCsv').addEventListener('click', async () => {
-            const loadingMessage = document.getElementById('loadingMessage');
-            loadingMessage.classList.remove('hidden');
-
-            try {
-                const { data, error } = await supabaseClient
-                    .from('respuestas')
-                    .select('respuestas_completas'); // Select only the jsonb column
-
-                if (error) {
-                    showMessage('Error al cargar los datos para el CSV: ' + error.message, 'error');
-                    return;
-                }
-
-                if (!data || data.length === 0) {
-                    showMessage('No hay datos para exportar.');
-                    return;
-                }
-
-                let allKeys = new Set();
-                let flattenedData = [];
-
-                // Flatten each JSON object and collect all unique keys
-                data.forEach(row => {
-                    if (row.respuestas_completas) {
-                        let flatRow = {};
-                        for (const key in row.respuestas_completas) {
-                            if (Object.hasOwnProperty.call(row.respuestas_completas, key)) {
-                                const value = row.respuestas_completas[key];
-                                if (Array.isArray(value)) {
-                                    // Join array elements into a single string for CSV
-                                    flatRow[key] = value.join('; '); // Use semicolon to avoid issues with commas in values
-                                } else if (value === null) {
-                                    flatRow[key] = ''; // Represent null as empty string in CSV
-                                } else {
-                                    flatRow[key] = String(value).replace(/"/g, '""'); // Escape double quotes
-                                }
-                                allKeys.add(key);
-                            }
-                        }
-                        flattenedData.push(flatRow);
-                    }
-                });
-
-                // Convert Set of keys to an array and sort them for consistent column order
-                const headers = Array.from(allKeys).sort();
-
-                // Build CSV string
-                let csv = headers.map(header => `"${header}"`).join(',') + '\n'; // CSV header row
-
-                flattenedData.forEach(row => {
-                    const rowValues = headers.map(header => {
-                        const value = row[header] !== undefined ? row[header] : ''; // Handle missing keys
-                        // Ensure values are properly quoted if they contain commas or newlines
-                        return `"${String(value).replace(/"/g, '""')}"`;
-                    });
-                    csv += rowValues.join(',') + '\n';
-                });
-
-                // Create a Blob and download link
-                const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                link.setAttribute('download', 'cuestionario_respuestas.csv');
-                document.body.appendChild(link); // Append to body to make it clickable in some browsers
-                link.click();
-                document.body.removeChild(link); // Clean up
-
-                showMessage('Datos descargados como CSV correctamente.');
-
-            } catch (e) {
-                showMessage('Ha ocurrido un error inesperado al descargar el CSV: ' + e.message, 'error');
-            } finally {
-                loadingMessage.classList.add('hidden');
-            }
-        });
-
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
