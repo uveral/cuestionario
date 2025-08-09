@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login de Administrador</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css"> <!-- Reusing admin styles for consistency -->
+</head>
+<body class="selection:bg-blue-200 selection:text-blue-900">
+    <div class="container">
+        <h1 class="text-3xl font-extrabold mb-6 text-gray-900">Acceso de Administrador</h1>
+        <form id="loginForm">
+            <div class="mb-4">
+                <label for="email" class="block text-gray-700 text-sm font-semibold mb-2 text-left">Email:</label>
+                <input type="email" id="email" name="email" required class="shadow-sm border rounded-lg w-full py-2 px-3 text-gray-700" placeholder="admin@ejemplo.com" />
+            </div>
+            <div class="mb-6">
+                <label for="password" class="block text-gray-700 text-sm font-semibold mb-2 text-left">Contraseña:</label>
+                <input type="password" id="password" name="password" required class="shadow-sm border rounded-lg w-full py-2 px-3 text-gray-700" placeholder="********" />
+            </div>
+            <button
+                id="loginButton"
+                type="submit"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300 transform hover:scale-105 text-lg"
+            >
+                Iniciar Sesión
+            </button>
+        </form>
+    </div>
+
+    <!-- Custom message box container -->
+    <div id="messageBox"></div>
+
+    <!-- Load Supabase library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="login.js"></script>
+</body>
+</html>
