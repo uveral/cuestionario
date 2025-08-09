@@ -52,8 +52,8 @@ body {
 }
 .question-group {
     border-bottom: 1px solid #e5e7eb; /* border-b border-gray-200 */
-    padding-bottom: 1.5rem;
-    margin-bottom: 1.5rem;
+    padding-bottom: 1rem; /* Reduced from 1.5rem */
+    margin-bottom: 1rem; /* Reduced from 1.5rem */
 }
 .question-group:last-child {
     border-bottom: none;
@@ -62,7 +62,7 @@ body {
 .radio-option {
     display: flex;
     align-items: center;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem; /* Reduced from 0.5rem */
 }
 .radio-option input[type="radio"] {
     margin-right: 0.5rem;
@@ -70,45 +70,10 @@ body {
 .checkbox-option {
     display: flex;
     align-items: center;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem; /* Reduced from 0.5rem */
 }
 .checkbox-option input[type="checkbox"] {
     margin-right: 0.5rem;
-}
-
-/* Accordion Styles */
-.accordion-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    padding: 1rem;
-    border-bottom: 1px solid #e5e7eb;
-    transition: background-color 0.3s;
-}
-
-.accordion-header:hover {
-    background-color: #f9fafb; /* gray-50 */
-}
-
-.accordion-header h2, .accordion-header p {
-    margin-bottom: 0; /* Override default margins */
-}
-
-.accordion-icon {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #3b82f6; /* blue-500 */
-    transition: transform 0.3s;
-}
-
-.accordion-header.active .accordion-icon {
-    transform: rotate(45deg);
-}
-
-.accordion-content {
-    padding: 0 1rem 1rem 1rem;
-    border-bottom: 1px solid #e5e7eb;
 }
 
 /* Input validation styles */

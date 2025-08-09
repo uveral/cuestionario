@@ -80,18 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('questionnaireForm');
     if (!form) return;
 
-    // Accordion functionality
-    document.querySelectorAll('.accordion-header').forEach(header => {
-        header.addEventListener('click', () => {
-            const content = header.nextElementSibling;
-            header.classList.toggle('active');
-            content.classList.toggle('hidden');
-            const icon = header.querySelector('.accordion-icon');
-            if (icon) {
-                icon.textContent = content.classList.contains('hidden') ? '+' : '-';
-            }
-        });
-    });
 
     // Real-time DNI validation
     const dniInput = document.getElementById('dni');
