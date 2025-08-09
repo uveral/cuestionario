@@ -18,10 +18,13 @@ function closeMessage() {
     messageBox.innerHTML = '';
 }
 
-const supabaseUrl = 'https://syscmsennlikqzikbznl.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN5c2Ntc2Vubmxpa3F6aWtiem5sIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA0MTQ0MDcsImV4cCI6MjA2NTk5MDQwN30.I5cQJNCEFtF1NAIypmgMBYAIiVnSyhu_7C1WhKzCVxE';
+const supabaseUrl = 'https://slnbgfkkwjlxcsyrovam.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNsbmJnZmtrd2pseGNzeXJvdmFtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEyOTg4OTMsImV4cCI6MjA2Njg3NDg5M30.c1mwy72SE0_xYdVwPmLccbwKwnPR7nLUaaX-0oaFY14';
 
-const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+let supabaseClient;
+if (typeof window !== 'undefined' && window.supabase) {
+    supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+}
 
 // Helper to get selected radio value by name
 function getRadioValue(name) {
@@ -56,9 +59,69 @@ function resetForm() {
     form.dispatchEvent(event);
 }
 
+function validateDNI(dni) {
+    const dniRegex = /^\d{8}[a-zA-Z]$/;
+    if (!dniRegex.test(dni)) {
+        return false;
+    }
+    const number = dni.slice(0, 8);
+    const letter = dni.slice(8).toUpperCase();
+    const validLetters = 'TRWAGMYFPDXBNJZSQVHLCKE';
+    const calculatedLetter = validLetters[Number(number) % 23];
+    return letter === calculatedLetter;
+}
+
+// Export functions for testing
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { validateDNI };
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('questionnaireForm');
     if (!form) return;
+
+    // Accordion functionality
+    document.querySelectorAll('.accordion-header').forEach(header => {
+        header.addEventListener('click', () => {
+            const content = header.nextElementSibling;
+            header.classList.toggle('active');
+            content.classList.toggle('hidden');
+            const icon = header.querySelector('.accordion-icon');
+            if (icon) {
+                icon.textContent = content.classList.contains('hidden') ? '+' : '-';
+            }
+        });
+    });
+
+    // Real-time DNI validation
+    const dniInput = document.getElementById('dni');
+    const dniMessage = document.getElementById('dni-validation-message');
+    dniInput.addEventListener('input', () => {
+        const dni = dniInput.value.trim();
+        dniInput.classList.remove('input-success', 'input-error');
+        dniMessage.textContent = '';
+        dniMessage.classList.remove('valid', 'invalid');
+
+        if (dni.length === 0) return;
+
+        if (validateDNI(dni)) {
+            dniInput.classList.add('input-success');
+            dniMessage.textContent = 'DNI válido';
+            dniMessage.classList.add('valid');
+        } else {
+            dniInput.classList.add('input-error');
+            dniMessage.textContent = 'Formato de DNI incorrecto';
+            dniMessage.classList.add('invalid');
+        }
+    });
+
+    // Clear error on input for required fields
+    ['nombre', 'apellidos'].forEach(id => {
+        const input = document.getElementById(id);
+        input.addEventListener('input', () => {
+            input.classList.remove('input-error');
+        });
+    });
 
     document.getElementById('limpiar').addEventListener('click', resetForm);
 
@@ -188,9 +251,25 @@ document.getElementById('enviar').addEventListener('click', async (event) => { /
         }
     }
 
-    // Basic validation for required fields
-    if (!formData.dni || !formData.nombre || !formData.apellidos) {
-        showMessage('Por favor, rellena al menos los campos de DNI, Nombre y Apellidos.', 'error');
+    // Enhanced validation for required fields
+    let isValid = true;
+    const requiredFields = ['nombre', 'apellidos', 'dni'];
+    requiredFields.forEach(id => {
+        const input = document.getElementById(id);
+        if (!input.value.trim()) {
+            input.classList.add('input-error');
+            isValid = false;
+        }
+    });
+
+    if (!isValid) {
+        showMessage('Por favor, rellena los campos obligatorios marcados en rojo.', 'error');
+        return;
+    }
+
+    if (!validateDNI(formData.dni)) {
+        showMessage('El formato del DNI no es válido. Por favor, corrígelo.', 'error');
+        document.getElementById('dni').classList.add('input-error');
         return;
     }
 
